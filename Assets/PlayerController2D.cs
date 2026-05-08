@@ -2,11 +2,16 @@
 
 public class PlayerController2D : MonoBehaviour
 {
-    public enum PlayerState { Grounded, Moving, Jumping, Dashing }
+    public enum PlayerState
+    {
+        Grounded,
+        Moving,
+        Jumping,
+        Dashing
+    }
 
     [Header("State")]
     public bool inputEnabled = false;
-
 
     [Header("INPUT (Rebindable)")]
     public KeyCode moveLeft = KeyCode.A;
@@ -23,6 +28,7 @@ public class PlayerController2D : MonoBehaviour
     public float dashSpeed = 18f;
     public float dashDuration = 0.25f;
     public float dashCooldown = 0.6f;
+
     public Transform wallCheck;
     public float wallCheckDistance = 0.3f;
     public LayerMask groundLayer;
@@ -35,9 +41,13 @@ public class PlayerController2D : MonoBehaviour
     [Header("Jump Settings")]
     public float jumpForce = 14f;
     public int maxJumps = 2;
+
     private int jumpCount;
+
     public float jumpHoldBoost = 25f;
-    [Range(0.1f, 1f)] public float shortHopMultiplier = 0.5f;
+
+    [Range(0.1f, 1f)]
+    public float shortHopMultiplier = 0.5f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -50,29 +60,53 @@ public class PlayerController2D : MonoBehaviour
     public PlayerDebugText debugText;
     public Animator animator;
 
+    [Header("Weapon")]
     public Transform firePoint;
+    public Transform weaponHolder;
+
+    private Vector3 firePointDefaultLocalPos;
+    private Vector3 weaponHolderDefaultLocalPos;
+
     private SpriteRenderer[] childSprites;
 
-    [HideInInspector] public bool facingRight = true;
+    [HideInInspector]
+    public bool facingRight = true;
 
     private float moveInput;
     private bool isGrounded;
+
     private PlayerCombat combat;
+
     public PlayerState currentState;
-
-
 
     void Start()
     {
         combat = GetComponent<PlayerCombat>();
-        // Get all sprite renderers including nested children (hair, torso, etc.)
-        // This recursively finds all SpriteRenderers in the hierarchy
-        childSprites = GetComponentsInChildren<SpriteRenderer>(includeInactive: false);
+
+        // Cache all sprite renderers
+        childSprites =
+            GetComponentsInChildren<SpriteRenderer>(
+                includeInactive: false
+            );
+
+        // Cache original positions
+        if (firePoint != null)
+        {
+            firePointDefaultLocalPos =
+                firePoint.localPosition;
+        }
+
+        if (weaponHolder != null)
+        {
+            weaponHolderDefaultLocalPos =
+                weaponHolder.localPosition;
+        }
     }
 
     void Update()
     {
-        if (!inputEnabled) return;
+        if (!inputEnabled)
+            return;
 
         HandleInput();
         HandleState();
@@ -81,11 +115,15 @@ public class PlayerController2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!inputEnabled) return;
+        if (!inputEnabled)
+            return;
 
         ApplyMovement();
+
         HandleDash();
+
         HandleJumpHold();
+
         ReduceStickiness();
 
         if (dashCooldownTimer > 0f)
@@ -95,12 +133,24 @@ public class PlayerController2D : MonoBehaviour
     void HandleInput()
     {
         moveInput = 0;
-        if (Input.GetKey(moveLeft)) moveInput = -1;
-        if (Input.GetKey(moveRight)) moveInput = 1;
 
-        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, 0.15f, groundLayer);
-        if (isGrounded) jumpCount = 0;
+        if (Input.GetKey(moveLeft))
+            moveInput = -1;
 
+        if (Input.GetKey(moveRight))
+            moveInput = 1;
+
+        isGrounded = Physics2D.Raycast(
+            groundCheck.position,
+            Vector2.down,
+            0.15f,
+            groundLayer
+        );
+
+        if (isGrounded)
+            jumpCount = 0;
+
+        // Jump
         if (Input.GetKeyDown(jumpKey))
         {
             if (isGrounded || jumpCount < maxJumps)
@@ -113,7 +163,6 @@ public class PlayerController2D : MonoBehaviour
 
                 jumpCount++;
 
-                // 🔥 RESET + TRIGGER
                 if (animator != null)
                 {
                     animator.ResetTrigger("Jump");
@@ -122,41 +171,65 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(jumpKey) && rb.linearVelocity.y > 0)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * shortHopMultiplier);
+        // Short hop
+        if (Input.GetKeyUp(jumpKey) &&
+            rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity =
+                new Vector2(
+                    rb.linearVelocity.x,
+                    rb.linearVelocity.y *
+                    shortHopMultiplier
+                );
+        }
 
-        if (Input.GetKeyDown(dashKey) && !isDashing && dashCooldownTimer <= 0f)
+        // Dash
+        if (Input.GetKeyDown(dashKey) &&
+            !isDashing &&
+            dashCooldownTimer <= 0f)
         {
             StartDash();
+
             dashCooldownTimer = dashCooldown;
         }
 
+        // Shoot
         if (combat != null)
         {
-            if (Input.GetKey(shootKey)) combat.TryShoot(held: true);
-            if (Input.GetKeyDown(shootKey)) combat.TryShoot(held: false);
+            if (Input.GetKey(shootKey))
+                combat.TryShoot(held: true);
+
+            if (Input.GetKeyDown(shootKey))
+                combat.TryShoot(held: false);
         }
     }
 
     void StartDash()
     {
         isDashing = true;
+
         dashTimer = dashDuration;
-        dashDirection = facingRight ? 1f : -1f;
+
+        dashDirection =
+            facingRight
+            ? 1f
+            : -1f;
     }
 
     void HandleDash()
     {
-        if (!isDashing) return;
+        if (!isDashing)
+            return;
 
         dashTimer -= Time.fixedDeltaTime;
 
-        RaycastHit2D hit = Physics2D.Raycast(
-            wallCheck.position,
-            Vector2.right * dashDirection,
-            wallCheckDistance,
-            groundLayer
-        );
+        RaycastHit2D hit =
+            Physics2D.Raycast(
+                wallCheck.position,
+                Vector2.right * dashDirection,
+                wallCheckDistance,
+                groundLayer
+            );
 
         if (hit.collider != null)
         {
@@ -164,7 +237,11 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0);
+        rb.linearVelocity =
+            new Vector2(
+                dashDirection * dashSpeed,
+                0
+            );
 
         if (dashTimer <= 0f)
             EndDash();
@@ -177,40 +254,98 @@ public class PlayerController2D : MonoBehaviour
 
     void ApplyMovement()
     {
-        if (isDashing) return;
+        if (isDashing)
+            return;
 
-        float control = isGrounded ? 1f : airControl;
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed * control, rb.linearVelocity.y);
+        float control =
+            isGrounded
+            ? 1f
+            : airControl;
+
+        rb.linearVelocity =
+            new Vector2(
+                moveInput * moveSpeed * control,
+                rb.linearVelocity.y
+            );
     }
 
     void HandleJumpHold()
     {
-        if (Input.GetKey(jumpKey) && rb.linearVelocity.y > 0)
-            rb.linearVelocity += Vector2.up * jumpHoldBoost * Time.fixedDeltaTime;
+        if (Input.GetKey(jumpKey) &&
+            rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity +=
+                Vector2.up *
+                jumpHoldBoost *
+                Time.fixedDeltaTime;
+        }
     }
 
     void ReduceStickiness()
     {
-        if (isGrounded) return;
+        if (isGrounded)
+            return;
 
-        if (Mathf.Abs(rb.linearVelocity.x) < 0.01f) return;
+        if (Mathf.Abs(rb.linearVelocity.x) < 0.01f)
+            return;
 
-        RaycastHit2D leftHit = Physics2D.Raycast(transform.position, Vector2.left, 0.4f, groundLayer);
-        RaycastHit2D rightHit = Physics2D.Raycast(transform.position, Vector2.right, 0.4f, groundLayer);
+        RaycastHit2D leftHit =
+            Physics2D.Raycast(
+                transform.position,
+                Vector2.left,
+                0.4f,
+                groundLayer
+            );
 
-        if (leftHit.collider != null && moveInput < 0)
-            rb.AddForce(Vector2.right * 2f, ForceMode2D.Force);
+        RaycastHit2D rightHit =
+            Physics2D.Raycast(
+                transform.position,
+                Vector2.right,
+                0.4f,
+                groundLayer
+            );
 
-        if (rightHit.collider != null && moveInput > 0)
-            rb.AddForce(Vector2.left * 2f, ForceMode2D.Force);
+        if (leftHit.collider != null &&
+            moveInput < 0)
+        {
+            rb.AddForce(
+                Vector2.right * 2f,
+                ForceMode2D.Force
+            );
+        }
+
+        if (rightHit.collider != null &&
+            moveInput > 0)
+        {
+            rb.AddForce(
+                Vector2.left * 2f,
+                ForceMode2D.Force
+            );
+        }
     }
 
     void HandleState()
     {
-        if (isDashing) currentState = PlayerState.Dashing;
-        else if (!isGrounded) currentState = PlayerState.Jumping;
-        else if (Mathf.Abs(moveInput) > 0.1f) currentState = PlayerState.Moving;
-        else currentState = PlayerState.Grounded;
+        if (isDashing)
+        {
+            currentState =
+                PlayerState.Dashing;
+        }
+        else if (!isGrounded)
+        {
+            currentState =
+                PlayerState.Jumping;
+        }
+        else if (Mathf.Abs(moveInput) > 0.1f)
+        {
+            currentState =
+                PlayerState.Moving;
+        }
+        else
+        {
+            currentState =
+                PlayerState.Grounded;
+        }
 
         if (debugText != null)
             debugText.SetState(currentState);
@@ -218,47 +353,99 @@ public class PlayerController2D : MonoBehaviour
 
     void Flip()
     {
+        // FACE RIGHT
         if (moveInput > 0)
         {
             facingRight = true;
+
             FlipAllSprites(false);
 
-            // Adjust firePoint scale for right direction
-            Vector3 scale = firePoint.localScale;
-            scale.x = Mathf.Abs(scale.x);
-            firePoint.localScale = scale;
+            // Fire point
+            if (firePoint != null)
+            {
+                Vector3 firePos =
+                    firePointDefaultLocalPos;
+
+                firePos.x =
+                    Mathf.Abs(firePos.x);
+
+                firePoint.localPosition =
+                    firePos;
+            }
+
+            // Weapon holder
+            if (weaponHolder != null)
+            {
+                Vector3 weaponPos =
+                    weaponHolderDefaultLocalPos;
+
+                weaponPos.x =
+                    Mathf.Abs(weaponPos.x);
+
+                weaponHolder.localPosition =
+                    weaponPos;
+            }
         }
+
+        // FACE LEFT
         else if (moveInput < 0)
         {
             facingRight = false;
+
             FlipAllSprites(true);
 
-            // Adjust firePoint scale for left direction
-            Vector3 scale = firePoint.localScale;
-            scale.x = -Mathf.Abs(scale.x);
-            firePoint.localScale = scale;
+            // Fire point
+            if (firePoint != null)
+            {
+                Vector3 firePos =
+                    firePointDefaultLocalPos;
+
+                firePos.x =
+                    -Mathf.Abs(firePos.x);
+
+                firePoint.localPosition =
+                    firePos;
+            }
+
+            // Weapon holder
+            if (weaponHolder != null)
+            {
+                Vector3 weaponPos =
+                    weaponHolderDefaultLocalPos;
+
+                weaponPos.x =
+                    -Mathf.Abs(weaponPos.x);
+
+                weaponHolder.localPosition =
+                    weaponPos;
+            }
         }
     }
 
     void FlipAllSprites(bool flipX)
     {
-        // Flip main sprite
+        // Main sprite
         if (spriteRenderer != null)
             spriteRenderer.flipX = flipX;
 
-        // Recursively flip all child sprites (catches customization elements at any depth)
+        // Child sprites
         FlipChildSprites(transform, flipX);
     }
 
-    void FlipChildSprites(Transform parent, bool flipX)
+    void FlipChildSprites(
+        Transform parent,
+        bool flipX
+    )
     {
         foreach (Transform child in parent)
         {
-            SpriteRenderer sr = child.GetComponent<SpriteRenderer>();
+            SpriteRenderer sr =
+                child.GetComponent<SpriteRenderer>();
+
             if (sr != null)
                 sr.flipX = flipX;
 
-            // Recursively check grandchildren
+            // Recursive
             FlipChildSprites(child, flipX);
         }
     }

@@ -5,6 +5,13 @@ public class WeaponData : ScriptableObject
 {
     public string weaponName;
 
+    [Header("Visuals")]
+    public Sprite weaponSprite;
+
+    public Vector3 localPosition;
+    public Vector3 localRotation;
+    public Vector3 localScale = Vector3.one;
+
     [Header("Projectile")]
     public GameObject projectilePrefab;
 
@@ -18,5 +25,5 @@ public class WeaponData : ScriptableObject
     public float reloadTime = 1f;
 
     [Header("Firing Mode")]
-    public bool automatic = true; // true = hold, false = tap
+    public bool automatic = true;
 }
