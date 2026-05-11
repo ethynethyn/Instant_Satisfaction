@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ public class CustomisationElement : MonoBehaviour
     public List<GameObject> options;
 
     [Header("Highlight")]
-    public Image highlightBorder;
+    public GameObject highlightBorder;
 
     private int currentIndex = 0;
 
@@ -23,9 +22,7 @@ public class CustomisationElement : MonoBehaviour
 
         if (options.Count == 0)
         {
-            Debug.LogError(
-                gameObject.name + " HAS NO OPTIONS"
-            );
+            Debug.LogError(gameObject.name + " HAS NO OPTIONS");
             return;
         }
 
@@ -51,6 +48,7 @@ public class CustomisationElement : MonoBehaviour
             return;
 
         options[currentIndex].SetActive(false);
+
         currentIndex++;
 
         if (currentIndex >= options.Count)
@@ -69,6 +67,7 @@ public class CustomisationElement : MonoBehaviour
             return;
 
         options[currentIndex].SetActive(false);
+
         currentIndex--;
 
         if (currentIndex < 0)
@@ -80,6 +79,6 @@ public class CustomisationElement : MonoBehaviour
     public void SetHighlight(bool active)
     {
         if (highlightBorder != null)
-            highlightBorder.enabled = active;
+            highlightBorder.SetActive(active);
     }
 }

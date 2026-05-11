@@ -70,7 +70,7 @@ public class GameStateManager : MonoBehaviour
 
     void EnterMenu()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
 
         if (mainMenu != null &&
             mainMenu.menuPanel != null)

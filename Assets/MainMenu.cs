@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
         if (player3 != null) player3.SetActive(false);
         if (player4 != null) player4.SetActive(false);
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
 
     public void OnClick2Player()
@@ -77,6 +77,6 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.ResetAllPlayers();
 
         menuPanel.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
 }

@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 23a12e6d217bed74c828f170804ce48d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3142184329047783168
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_0
+  - first:
+      213: -7787242915701674162
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_1
+  - first:
+      213: 8494256382817816391
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_2
+  - first:
+      213: 1600971005235107888
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_3
+  - first:
+      213: -5244215176279773643
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_4
+  - first:
+      213: -2245499913784562474
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_5
+  - first:
+      213: 8323016827890106494
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_6
+  - first:
+      213: 8800945648918470550
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_7
+  - first:
+      213: 879342789945328505
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_8
+  - first:
+      213: 601663156516922417
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_9
+  - first:
+      213: -4255819305775260193
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_10
+  - first:
+      213: -6884451854512608794
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_11
+  - first:
+      213: 2433203038347795995
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_12
+  - first:
+      213: -3958943136418788350
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_13
+  - first:
+      213: 3742926232609439018
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_14
+  - first:
+      213: -2620285829152438675
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_15
+  - first:
+      213: -8755542992945226047
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_16
+  - first:
+      213: 5080632844329757700
+    second: Cool Text - CUSTOMISE CHARACTER 507733498464613_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 009ce403008b464d0800000000000000
+      internalID: -3142184329047783168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_1
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4face5a3d72ee390800000000000000
+      internalID: -7787242915701674162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_2
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74f43f8fc29a1e570800000000000000
+      internalID: 8494256382817816391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_3
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0381dbe95aac73610800000000000000
+      internalID: 1600971005235107888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_4
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ea12c051ec837b0800000000000000
+      internalID: -5244215176279773643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_5
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dc63bfb9b166d0e0800000000000000
+      internalID: -2245499913784562474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_6
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 5
+        width: 33
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e700dfd25bb418370800000000000000
+      internalID: 8323016827890106494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_7
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69f1e43307d332a70800000000000000
+      internalID: 8800945648918470550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_8
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9730e76cb9d043c00800000000000000
+      internalID: 879342789945328505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_9
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134a1aef379895800800000000000000
+      internalID: 601663156516922417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_10
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdd1403c3ea40f4c0800000000000000
+      internalID: -4255819305775260193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_11
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e92f7283838570a0800000000000000
+      internalID: -6884451854512608794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_12
+      rect:
+        serializedVersion: 2
+        x: 1004
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1e1f1f854974c120800000000000000
+      internalID: 2433203038347795995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_13
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20c89cb51320f09c0800000000000000
+      internalID: -3958943136418788350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_14
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2d3d23e39b81f330800000000000000
+      internalID: 3742926232609439018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_15
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d660167dbefd2abd0800000000000000
+      internalID: -2620285829152438675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_16
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ced6d969001e7680800000000000000
+      internalID: -8755542992945226047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cool Text - CUSTOMISE CHARACTER 507733498464613_17
+      rect:
+        serializedVersion: 2
+        x: 1412
+        y: 5
+        width: 81
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c257057a8028640800000000000000
+      internalID: 5080632844329757700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_0: -3142184329047783168
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_1: -7787242915701674162
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_10: -4255819305775260193
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_11: -6884451854512608794
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_12: 2433203038347795995
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_13: -3958943136418788350
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_14: 3742926232609439018
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_15: -2620285829152438675
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_16: -8755542992945226047
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_17: 5080632844329757700
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_2: 8494256382817816391
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_3: 1600971005235107888
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_4: -5244215176279773643
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_5: -2245499913784562474
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_6: 8323016827890106494
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_7: 8800945648918470550
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_8: 879342789945328505
+      Cool Text - CUSTOMISE CHARACTER 507733498464613_9: 601663156516922417
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

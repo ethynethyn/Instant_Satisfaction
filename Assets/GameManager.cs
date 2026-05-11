@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [Header("Winner Cameras")]
     public Camera mainCamera;
 
+    [Header("Game Over")]
+    public GameObject gameOverObject;
+
     public Camera player1WinCamera;
     public Camera player2WinCamera;
     public Camera player3WinCamera;
@@ -70,6 +73,9 @@ public class GameManager : MonoBehaviour
     {
         if (roundEndUI != null)
             roundEndUI.Hide();
+
+        if (gameOverObject != null)
+            gameOverObject.SetActive(false);
     }
 
     void Update()
@@ -268,10 +274,27 @@ public class GameManager : MonoBehaviour
 
         ClearWeapons();
 
+        // Build list of players still alive in the match
+        List<PlayerHealth> survivingPlayers =
+            new List<PlayerHealth>();
+
+        foreach (PlayerHealth p in activePlayers)
+        {
+            if (p != null && p.currentLives > 0)
+            {
+                survivingPlayers.Add(p);
+            }
+            else if (p != null)
+            {
+                // Keep eliminated players disabled
+                p.gameObject.SetActive(false);
+            }
+        }
+
         List<Transform> shuffledSpawns =
             GetShuffledSpawnPoints();
 
-        if (shuffledSpawns.Count < activePlayers.Count)
+        if (shuffledSpawns.Count < survivingPlayers.Count)
         {
             Debug.LogError(
                 "NOT ENOUGH SPAWN POINTS!"
@@ -280,26 +303,30 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < activePlayers.Count; i++)
+        // Spawn ONLY surviving players
+        for (int i = 0; i < survivingPlayers.Count; i++)
         {
-            activePlayers[i].ResetForRound(
+            PlayerHealth player =
+                survivingPlayers[i];
+
+            player.ResetForRound(
                 shuffledSpawns[i].position
             );
 
             PlayerCombat combat =
-                activePlayers[i].GetComponent<PlayerCombat>();
+                player.GetComponent<PlayerCombat>();
 
             if (combat != null)
                 combat.ResetForRound();
 
             Rigidbody2D rb =
-                activePlayers[i].GetComponent<Rigidbody2D>();
+                player.GetComponent<Rigidbody2D>();
 
             if (rb != null)
                 rb.bodyType = RigidbodyType2D.Dynamic;
 
             PlayerController2D controller =
-                activePlayers[i].GetComponent<PlayerController2D>();
+                player.GetComponent<PlayerController2D>();
 
             if (controller != null)
             {
@@ -314,41 +341,60 @@ public class GameManager : MonoBehaviour
         if (roundOver)
             return;
 
-        int alivePlayers = 0;
+        int aliveThisRound = 0;
 
         foreach (PlayerHealth p in activePlayers)
         {
+            // Still active in current round
             if (p != null && p.gameObject.activeSelf)
-                alivePlayers++;
-        }
-
-        PlayerHealth eliminated = null;
-
-        foreach (PlayerHealth p in activePlayers)
-        {
-            if (p != null && p.currentLives <= 0)
             {
-                eliminated = p;
-                break;
+                aliveThisRound++;
             }
         }
 
-        if (eliminated != null)
+        // ROUND OVER
+        // only one player still standing
+        if (aliveThisRound <= 1)
         {
             roundOver = true;
 
-            StartCoroutine(
-                GameOverSequence(eliminated)
-            );
+            // Count players with lives remaining
+            int playersStillInGame = 0;
 
-            return;
-        }
+            foreach (PlayerHealth p in activePlayers)
+            {
+                if (p != null && p.currentLives > 0)
+                {
+                    playersStillInGame++;
+                }
+            }
 
-        if (alivePlayers <= 1)
-        {
-            roundOver = true;
+            // GAME OVER
+            // only one player has lives left
+            if (playersStillInGame <= 1)
+            {
+                PlayerHealth eliminated = null;
 
-            StartCoroutine(RoundEndSequence());
+                foreach (PlayerHealth p in activePlayers)
+                {
+                    if (p != null && p.currentLives <= 0)
+                    {
+                        eliminated = p;
+                        break;
+                    }
+                }
+
+                StartCoroutine(
+                    GameOverSequence(eliminated)
+                );
+            }
+            else
+            {
+                // NEXT ROUND
+                StartCoroutine(
+                    RoundEndSequence()
+                );
+            }
         }
     }
 
@@ -555,9 +601,7 @@ public class GameManager : MonoBehaviour
         StartRound();
     }
 
-    IEnumerator GameOverSequence(
-     PlayerHealth eliminated
- )
+    IEnumerator GameOverSequence(PlayerHealth eliminated)
     {
         FreezeAllPlayers();
 
@@ -567,7 +611,9 @@ public class GameManager : MonoBehaviour
 
         foreach (PlayerHealth p in activePlayers)
         {
-            if (p != null && p != eliminated)
+            if (p != null &&
+                p != eliminated &&
+                p.currentLives > 0)
             {
                 winner = p;
                 break;
@@ -603,21 +649,28 @@ public class GameManager : MonoBehaviour
             roundEndUI.ShowRoundEnd(
                 activePlayers,
                 true
+
             );
+            if (gameOverObject != null)
+                gameOverObject.SetActive(true);
         }
 
-        yield return new WaitForSeconds(
-            roundStartDelay
-        );
+        // 🔥 GAME NOW STAYS ON FINAL SCREEN FOREVER
+        gameActive = false;
 
-        ClearWinnerText(); // 🔥 RESET DEBUG TEXT HERE
+        // Optional:
+        // wait for escape key to return to menu
+        while (!Input.GetKeyDown(KeyCode.Escape))
+        {
+            yield return null;
+        }
+
+        ClearWinnerText();
 
         if (roundEndUI != null)
             roundEndUI.Hide();
 
         ResetCameraImmediate();
-
-        gameActive = false;
 
         ResetAllPlayers();
 

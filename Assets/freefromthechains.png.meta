@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: f5702e6f7f28b44489275e55f16a53c7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 858032845794942539
+    second: freefromthechains_0
+  - first:
+      213: -5601180471142417066
+    second: freefromthechains_1
+  - first:
+      213: -6851670090259383898
+    second: freefromthechains_2
+  - first:
+      213: 4855978090821532375
+    second: freefromthechains_3
+  - first:
+      213: -5688479577458195324
+    second: freefromthechains_4
+  - first:
+      213: 7187371804883387753
+    second: freefromthechains_5
+  - first:
+      213: -1560248901103617188
+    second: freefromthechains_6
+  - first:
+      213: -6703295941289555376
+    second: freefromthechains_7
+  - first:
+      213: 239429423600808423
+    second: freefromthechains_8
+  - first:
+      213: -3941720740180243471
+    second: freefromthechains_9
+  - first:
+      213: 8932901502102148039
+    second: freefromthechains_10
+  - first:
+      213: 5267914073083119979
+    second: freefromthechains_11
+  - first:
+      213: -5909173129432482181
+    second: freefromthechains_12
+  - first:
+      213: 1367477706626423312
+    second: freefromthechains_13
+  - first:
+      213: -8859719874262839586
+    second: freefromthechains_14
+  - first:
+      213: 232981348680739832
+    second: freefromthechains_15
+  - first:
+      213: 4815140961976320638
+    second: freefromthechains_16
+  - first:
+      213: -9044291116143489949
+    second: freefromthechains_17
+  - first:
+      213: 8039747547125467679
+    second: freefromthechains_18
+  - first:
+      213: 2281637514693400426
+    second: freefromthechains_19
+  - first:
+      213: 280892495677989066
+    second: freefromthechains_20
+  - first:
+      213: 8517637654211756645
+    second: freefromthechains_21
+  - first:
+      213: -4077111896549564563
+    second: freefromthechains_22
+  - first:
+      213: -4556728737725450994
+    second: freefromthechains_23
+  - first:
+      213: -6363819084473972417
+    second: freefromthechains_24
+  - first:
+      213: -7812789808910407550
+    second: freefromthechains_25
+  - first:
+      213: 7079740648300925456
+    second: freefromthechains_26
+  - first:
+      213: 920147675584903823
+    second: freefromthechains_27
+  - first:
+      213: 6644291193787467813
+    second: freefromthechains_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: freefromthechains_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 448
+        width: 33
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e9933c35858eb00800000000000000
+      internalID: 858032845794942539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 448
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65d73bea90c9442b0800000000000000
+      internalID: -5601180471142417066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_2
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 448
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a9bbe7ca5af9e0a0800000000000000
+      internalID: -6851670090259383898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_3
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 448
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da3f747856e36340800000000000000
+      internalID: 4855978090821532375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_4
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 321
+        width: 33
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4844a8196f57e01b0800000000000000
+      internalID: -5688479577458195324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_5
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 321
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9658bb2839caeb360800000000000000
+      internalID: 7187371804883387753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_6
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 321
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5b768814e1e85ae0800000000000000
+      internalID: -1560248901103617188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_7
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 321
+        width: 78
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05a4e136bdb19f2a0800000000000000
+      internalID: -6703295941289555376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_8
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 321
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e1b08ecacf925300800000000000000
+      internalID: 239429423600808423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_9
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 321
+        width: 52
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fb44c5fed13c49c0800000000000000
+      internalID: -3941720740180243471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_10
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 321
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c31a5e669a08fb70800000000000000
+      internalID: 8932901502102148039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_11
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 321
+        width: 49
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b69866950f36b1940800000000000000
+      internalID: 5267914073083119979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_12
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 321
+        width: 52
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7eb4efc8566efda0800000000000000
+      internalID: -5909173129432482181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_13
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 321
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01adbbd9ab14af210800000000000000
+      internalID: 1367477706626423312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_14
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 394
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede481517b3fb0580800000000000000
+      internalID: -8859719874262839586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_15
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 321
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb286f5d47bb3300800000000000000
+      internalID: 232981348680739832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_16
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 321
+        width: 49
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7208067131d2d240800000000000000
+      internalID: 4815140961976320638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_17
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 321
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36ccb0906293c7280800000000000000
+      internalID: -9044291116143489949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_18
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 194
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1a4b363ccbe29f60800000000000000
+      internalID: 8039747547125467679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_19
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 194
+        width: 33
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6751812b310aaf10800000000000000
+      internalID: 2281637514693400426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_20
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 194
+        width: 49
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac0a5f09c3ee5e300800000000000000
+      internalID: 280892495677989066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_21
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 194
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56288c0715ab43670800000000000000
+      internalID: 8517637654211756645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_22
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 194
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6fd4a0e4503b67c0800000000000000
+      internalID: -4077111896549564563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_23
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 194
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e057f0a0b5f33c0c0800000000000000
+      internalID: -4556728737725450994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_24
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 194
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f39c317724c2fa7a0800000000000000
+      internalID: -6363819084473972417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_25
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 267
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2886a1f0015639390800000000000000
+      internalID: -7812789808910407550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_26
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 194
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 012dedb0c9a404260800000000000000
+      internalID: 7079740648300925456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_27
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 194
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8ab3209f6505cc00800000000000000
+      internalID: 920147675584903823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: freefromthechains_28
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 194
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52845f543a3453c50800000000000000
+      internalID: 6644291193787467813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      freefromthechains_0: 858032845794942539
+      freefromthechains_1: -5601180471142417066
+      freefromthechains_10: 8932901502102148039
+      freefromthechains_11: 5267914073083119979
+      freefromthechains_12: -5909173129432482181
+      freefromthechains_13: 1367477706626423312
+      freefromthechains_14: -8859719874262839586
+      freefromthechains_15: 232981348680739832
+      freefromthechains_16: 4815140961976320638
+      freefromthechains_17: -9044291116143489949
+      freefromthechains_18: 8039747547125467679
+      freefromthechains_19: 2281637514693400426
+      freefromthechains_2: -6851670090259383898
+      freefromthechains_20: 280892495677989066
+      freefromthechains_21: 8517637654211756645
+      freefromthechains_22: -4077111896549564563
+      freefromthechains_23: -4556728737725450994
+      freefromthechains_24: -6363819084473972417
+      freefromthechains_25: -7812789808910407550
+      freefromthechains_26: 7079740648300925456
+      freefromthechains_27: 920147675584903823
+      freefromthechains_28: 6644291193787467813
+      freefromthechains_3: 4855978090821532375
+      freefromthechains_4: -5688479577458195324
+      freefromthechains_5: 7187371804883387753
+      freefromthechains_6: -1560248901103617188
+      freefromthechains_7: -6703295941289555376
+      freefromthechains_8: 239429423600808423
+      freefromthechains_9: -3941720740180243471
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

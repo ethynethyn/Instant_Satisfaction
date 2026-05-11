@@ -309,10 +309,10 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.98
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 1
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -369,10 +369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   gaussianStart:
     m_OverrideState: 1
     m_Value: 10
@@ -381,7 +381,7 @@ MonoBehaviour:
     m_Value: 30
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.5
   highQualitySampling:
     m_OverrideState: 1
     m_Value: 0
@@ -403,6 +403,137 @@ MonoBehaviour:
   bladeRotation:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &-1503821069126718490
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25792a1c800b6f5498b76a67b3c5b765, type: 3}
+  m_Name: CRTSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  showInSceneView:
+    m_OverrideState: 1
+    m_Value: 0
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
+  renderPassEvent:
+    m_OverrideState: 1
+    m_Value: 1
+  useBarrelDistortion:
+    m_OverrideState: 1
+    m_Value: 1
+  distortionStrength:
+    m_OverrideState: 1
+    m_Value: 0.28
+  distortionSmoothing:
+    m_OverrideState: 1
+    m_Value: 0.049
+  colorRampMode:
+    m_OverrideState: 1
+    m_Value: 0
+  colorRampTex:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  redValues:
+    m_OverrideState: 1
+    m_Value: 256
+  greenValues:
+    m_OverrideState: 1
+    m_Value: 256
+  blueValues:
+    m_OverrideState: 1
+    m_Value: 256
+  useDithering:
+    m_OverrideState: 1
+    m_Value: 0
+  tintColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.91132075, g: 1, b: 0.95834035, a: 1}
+  backgroundColor:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  scaleParameters:
+    m_OverrideState: 1
+    m_Value: 1
+  verticalReferenceResolution:
+    m_OverrideState: 1
+    m_Value: 1080
+  forcePointFiltering:
+    m_OverrideState: 1
+    m_Value: 1
+  rgbTex:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 5a2a93937af0bbf46a6acd2eb16b4cb2, type: 3}
+    dimension: 1
+  rgbStrength:
+    m_OverrideState: 1
+    m_Value: 0.17
+  scanlineTex:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: 7b5d79ca87223054fa2cb8ee041efb01, type: 3}
+    dimension: 1
+  scanlineStrength:
+    m_OverrideState: 1
+    m_Value: 0.27
+  scanlineSize:
+    m_OverrideState: 1
+    m_Value: 1
+  scrollSpeed:
+    m_OverrideState: 1
+    m_Value: 0
+  pixelSize:
+    m_OverrideState: 1
+    m_Value: 2
+  randomWear:
+    m_OverrideState: 1
+    m_Value: 1.26
+  aberrationStrength:
+    m_OverrideState: 0
+    m_Value: 0
+  useTracking:
+    m_OverrideState: 1
+    m_Value: 1
+  trackingTexture:
+    m_OverrideState: 1
+    m_Value: {fileID: 2800000, guid: ff875d1110d792d4587166970f6d9ffd, type: 3}
+    dimension: 1
+  trackingSize:
+    m_OverrideState: 1
+    m_Value: 1.05
+  trackingStrength:
+    m_OverrideState: 1
+    m_Value: 3.3
+  trackingSpeed:
+    m_OverrideState: 1
+    m_Value: 0.22
+  trackingJitter:
+    m_OverrideState: 1
+    m_Value: 0.052
+  trackingColorDamage:
+    m_OverrideState: 1
+    m_Value: 0
+  trackingLinesThreshold:
+    m_OverrideState: 1
+    m_Value: 1
+  trackingLinesColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 0.5}
+  brightness:
+    m_OverrideState: 1
+    m_Value: 1
+  contrast:
+    m_OverrideState: 1
+    m_Value: 1
+  enableInterlacing:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-1083910812058648046
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -464,13 +595,13 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   quality:
     m_OverrideState: 1
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   clamp:
     m_OverrideState: 1
     m_Value: 0.05
@@ -506,6 +637,7 @@ MonoBehaviour:
   - {fileID: -8186968272690591729}
   - {fileID: -3978695733392391637}
   - {fileID: -1083910812058648046}
+  - {fileID: -1503821069126718490}
 --- !u!114 &156332030701414761
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -603,7 +735,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -0.18
   xMultiplier:
     m_OverrideState: 1
     m_Value: 1
@@ -650,7 +782,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.14
 --- !u!114 &5762530381802164056
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -666,28 +798,28 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 15.69
   tintColor:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.020754695, g: 0.7718706, b: 1, a: 1}
   bloomMip:
     m_OverrideState: 1
     m_Value: 1
   firstFlareIntensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3.48
   secondaryFlareIntensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   warpedFlareIntensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.3
   warpedFlareScale:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1}
   samples:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   sampleDimmer:
     m_OverrideState: 1
     m_Value: 0.5
@@ -696,7 +828,7 @@ MonoBehaviour:
     m_Value: 1
   startingPosition:
     m_OverrideState: 1
-    m_Value: 1.25
+    m_Value: 1
   scale:
     m_OverrideState: 1
     m_Value: 1.5
