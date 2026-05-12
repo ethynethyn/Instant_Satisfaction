@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fff013ab1e4ea438a87a87d96d8263, type: 3}
+  m_Name: ShotGun
+  m_EditorClassIdentifier: 
+  weaponName: ShotGun
+  weaponSprite: {fileID: 7631219046128225658, guid: 7b1de0515e311d0418caf5d8d1aa5f3b, type: 3}
+  localPosition: {x: 0, y: 0, z: 0}
+  localRotation: {x: 0, y: 0, z: 0}
+  localScale: {x: 1, y: 1, z: 1}
+  projectilePrefab: {fileID: 6895167356829100281, guid: 45882d15c72d6cb4ea23663598b3ae08, type: 3}
+  fireRate: 0.3
+  projectileSpeed: 30
+  knockbackForce: 10
+  recoilForce: 20
+  spreadAngle: 13
+  projectileCount: 8
+  magazineSize: 5
+  reloadTime: 3
+  automatic: 0
+  screenShake: 0.05
+  muzzleFlashOffsetX: 3
+  fireSound: {fileID: 8300000, guid: 73ef5698884fc0d469990e3c11415a9a, type: 3}
+  reloadSound: {fileID: 8300000, guid: b15b9111f2558f84da7156b0c78db778, type: 3}
+  fireVolume: 1
+  reloadVolume: 1

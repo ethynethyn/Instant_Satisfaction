@@ -20,10 +20,31 @@ public class WeaponData : ScriptableObject
     public float projectileSpeed = 20f;
     public float knockbackForce = 10f;
 
+    [Header("Recoil")]
+    public float recoilForce = 5f;
+
+    [Header("Spread")]
+    public float spreadAngle = 0f;
+
+    [Header("Projectiles")]
+    public int projectileCount = 1;
+
     [Header("Magazine")]
     public int magazineSize = 6;
     public float reloadTime = 1f;
 
     [Header("Firing Mode")]
     public bool automatic = true;
+
+    [Header("Camera Shake")]
+    public float screenShake = 0.2f;
+
+    [Header("FX")]
+    public float muzzleFlashOffsetX = 0.2f;
+
+    [Header("Audio")]
+    public AudioClip fireSound;
+    public AudioClip reloadSound;
+    [Range(0f, 1f)] public float fireVolume = 1f;
+    [Range(0f, 1f)] public float reloadVolume = 1f;
 }

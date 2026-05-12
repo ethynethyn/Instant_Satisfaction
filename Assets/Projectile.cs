@@ -1,7 +1,22 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour
 {
+    [System.Serializable]
+    public class CollisionSound
+    {
+        [Header("Detection")]
+        public string tagName;
+        public LayerMask layers;
+
+        [Header("Sounds")]
+        public AudioClip[] sounds;
+
+        [Range(0f, 2f)]
+        public float volume = 1f;
+    }
+
     private Vector2 direction;
     private float speed;
     private float knockback;
@@ -9,7 +24,19 @@ public class Projectile : MonoBehaviour
 
     private Vector3 startPos;
 
+    [Header("Projectile")]
     public float maxDistance = 10f;
+
+    [Header("Audio")]
+    [Range(0f, 2f)]
+    public float masterImpactVolume = 1f;
+
+    [Tooltip("Fallback sound if no match is found")]
+    public AudioClip defaultImpactSound;
+
+    [Tooltip("Different sounds for different tags/layers")]
+    public List<CollisionSound> collisionSounds =
+        new List<CollisionSound>();
 
     private SpriteRenderer spriteRenderer;
 
@@ -18,10 +45,17 @@ public class Projectile : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Initialize(Vector2 dir, float projectileSpeed, float kb, GameObject ownerObject)
+    public void Initialize(
+        Vector2 dir,
+        float projectileSpeed,
+        float kb,
+        GameObject ownerObject
+    )
     {
         direction = dir.normalized;
+
         speed = projectileSpeed;
+
         knockback = kb;
 
         ownerInstanceID = ownerObject
@@ -32,16 +66,24 @@ public class Projectile : MonoBehaviour
 
         startPos = transform.position;
 
-        // Flip projectile sprite based on direction
+        // ROTATE PROJECTILE TO MATCH DIRECTION
+        float angle =
+            Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation =
+            Quaternion.Euler(0, 0, angle);
+
+        // OPTIONAL SPRITE FLIP
         if (spriteRenderer != null)
         {
-            spriteRenderer.flipX = direction.x < 0;
+            spriteRenderer.flipY = direction.x < 0;
         }
     }
 
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.position +=
+            (Vector3)(direction * speed * Time.deltaTime);
 
         if (Vector3.Distance(startPos, transform.position) >= maxDistance)
         {
@@ -52,10 +94,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Projectile hit: " + other.name + " on " + other.gameObject.name);
+        Debug.Log("Projectile hit: " + other.name);
 
-        // Ignore owner collision
-        int hitRootID = other.transform.root.gameObject.GetInstanceID();
+        // IGNORE OWNER COLLISION
+        int hitRootID =
+            other.transform.root.gameObject.GetInstanceID();
 
         if (hitRootID == ownerInstanceID)
         {
@@ -63,12 +106,19 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // Look for PlayerHealth in parents
-        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+        // PLAY IMPACT SOUND
+        PlayImpactSound(other);
+
+        // CHECK FOR PLAYER HEALTH
+        PlayerHealth health =
+            other.GetComponentInParent<PlayerHealth>();
 
         if (health != null)
         {
-            Debug.Log("PlayerHealth found on: " + health.gameObject.name + " — applying hit");
+            Debug.Log(
+                "PlayerHealth found on: "
+                + health.gameObject.name
+            );
 
             Vector2 kb = direction * knockback;
 
@@ -78,8 +128,86 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        Debug.Log("No PlayerHealth found — destroying projectile on: " + other.name);
+        Debug.Log(
+            "No PlayerHealth found — destroying projectile"
+        );
 
         Destroy(gameObject);
+    }
+
+    private void PlayImpactSound(Collider2D other)
+    {
+        AudioClip clipToPlay = null;
+
+        float finalVolume = masterImpactVolume;
+
+        foreach (CollisionSound collision in collisionSounds)
+        {
+            bool tagMatch =
+                !string.IsNullOrEmpty(collision.tagName) &&
+                other.CompareTag(collision.tagName);
+
+            bool layerMatch =
+                ((1 << other.gameObject.layer) & collision.layers) != 0;
+
+            if (tagMatch || layerMatch)
+            {
+                if (collision.sounds != null &&
+                    collision.sounds.Length > 0)
+                {
+                    clipToPlay =
+                        collision.sounds[
+                            Random.Range(0, collision.sounds.Length)
+                        ];
+
+                    finalVolume =
+                        collision.volume * masterImpactVolume;
+
+                    break;
+                }
+            }
+        }
+
+        if (clipToPlay == null)
+        {
+            clipToPlay = defaultImpactSound;
+        }
+
+        if (clipToPlay == null)
+            return;
+
+        // CREATE TEMP AUDIO OBJECT
+        GameObject tempAudio =
+            new GameObject("ImpactSound");
+
+        tempAudio.transform.position =
+            transform.position;
+
+        AudioSource source =
+            tempAudio.AddComponent<AudioSource>();
+
+        source.clip = clipToPlay;
+
+        // IMPORTANT SETTINGS
+        source.volume = finalVolume;
+
+        source.spatialBlend = 0f; // FULL 2D SOUND
+
+        source.rolloffMode =
+            AudioRolloffMode.Linear;
+
+        source.playOnAwake = false;
+
+        source.loop = false;
+
+        source.pitch =
+            Random.Range(0.95f, 1.05f);
+
+        source.Play();
+
+        Destroy(
+            tempAudio,
+            clipToPlay.length + 0.1f
+        );
     }
 }

@@ -1,0 +1,1599 @@
+fileFormatVersion: 2
+guid: e07279340219e0744abf5a709cbb040b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2915791535617773336
+    second: trillionaire_0
+  - first:
+      213: -1560067966315261334
+    second: trillionaire_1
+  - first:
+      213: -1783644982255258022
+    second: trillionaire_2
+  - first:
+      213: -7475133407770625142
+    second: trillionaire_3
+  - first:
+      213: 1027351748539997049
+    second: trillionaire_4
+  - first:
+      213: 1566912689356516540
+    second: trillionaire_5
+  - first:
+      213: -5285171908669476599
+    second: trillionaire_6
+  - first:
+      213: 6123080606952691556
+    second: trillionaire_7
+  - first:
+      213: 8163450183797610276
+    second: trillionaire_8
+  - first:
+      213: 6686391676024505596
+    second: trillionaire_9
+  - first:
+      213: -4891114393069262246
+    second: trillionaire_10
+  - first:
+      213: 8498439776083573976
+    second: trillionaire_11
+  - first:
+      213: -2124063217868991297
+    second: trillionaire_12
+  - first:
+      213: -6412880092021568593
+    second: trillionaire_13
+  - first:
+      213: -4940574085900572733
+    second: trillionaire_14
+  - first:
+      213: 1970619219136833192
+    second: trillionaire_15
+  - first:
+      213: 4426745647903217070
+    second: trillionaire_16
+  - first:
+      213: 546282956523511168
+    second: trillionaire_17
+  - first:
+      213: 5872416312070800714
+    second: trillionaire_18
+  - first:
+      213: 8612560401684059589
+    second: trillionaire_19
+  - first:
+      213: -315896298344996136
+    second: trillionaire_20
+  - first:
+      213: -3652246746270869540
+    second: trillionaire_21
+  - first:
+      213: -8550230571834501292
+    second: trillionaire_22
+  - first:
+      213: 169324247356880617
+    second: trillionaire_23
+  - first:
+      213: 1937831594017950120
+    second: trillionaire_24
+  - first:
+      213: 2261618126793724570
+    second: trillionaire_25
+  - first:
+      213: -3833556944118539427
+    second: trillionaire_26
+  - first:
+      213: 7442632920669722234
+    second: trillionaire_27
+  - first:
+      213: -1479719073844261061
+    second: trillionaire_28
+  - first:
+      213: 2616273018904073898
+    second: trillionaire_29
+  - first:
+      213: -4828644882910794352
+    second: trillionaire_30
+  - first:
+      213: 6221846058082821584
+    second: trillionaire_31
+  - first:
+      213: 6803160063735984373
+    second: trillionaire_32
+  - first:
+      213: 3518013457920180294
+    second: trillionaire_33
+  - first:
+      213: 3234474769428522161
+    second: trillionaire_34
+  - first:
+      213: -2693986956889368491
+    second: trillionaire_35
+  - first:
+      213: 8943110744314950423
+    second: trillionaire_36
+  - first:
+      213: -2234135291613820966
+    second: trillionaire_37
+  - first:
+      213: 4080584985192324182
+    second: trillionaire_38
+  - first:
+      213: 8793292854025395504
+    second: trillionaire_39
+  - first:
+      213: -7363902529232594780
+    second: trillionaire_40
+  - first:
+      213: 5444175366751616254
+    second: trillionaire_41
+  - first:
+      213: 323239582434146391
+    second: trillionaire_42
+  - first:
+      213: 7695516731063190260
+    second: trillionaire_43
+  - first:
+      213: -3432189239955695985
+    second: trillionaire_44
+  - first:
+      213: -1269739467562982645
+    second: trillionaire_45
+  - first:
+      213: 5731499662256778662
+    second: trillionaire_46
+  - first:
+      213: -6319015399239082674
+    second: trillionaire_47
+  - first:
+      213: -4340418971832661951
+    second: trillionaire_48
+  - first:
+      213: -26738366702090026
+    second: trillionaire_49
+  - first:
+      213: 1470264546994801762
+    second: trillionaire_50
+  - first:
+      213: -6700642400067717889
+    second: trillionaire_51
+  - first:
+      213: 7306736439408512531
+    second: trillionaire_52
+  - first:
+      213: -4237368573371252918
+    second: trillionaire_53
+  - first:
+      213: 2230157039027699331
+    second: trillionaire_54
+  - first:
+      213: -3289811314365672687
+    second: trillionaire_55
+  - first:
+      213: 6917218505351936494
+    second: trillionaire_56
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: trillionaire_0
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 643
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81f869ff3f8f67820800000000000000
+      internalID: 2915791535617773336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_1
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 570
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6210524376895ae0800000000000000
+      internalID: -1560067966315261334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_2
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 570
+        width: 78
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a56744bb6583f37e0800000000000000
+      internalID: -1783644982255258022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_3
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 570
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b3d2545cdf24890800000000000000
+      internalID: -7475133407770625142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_4
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 570
+        width: 52
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97b5a1fd8f2e14e00800000000000000
+      internalID: 1027351748539997049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_5
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 570
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbca5230acaceb510800000000000000
+      internalID: 1566912689356516540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_6
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 570
+        width: 33
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 901f1eea62c47a6b0800000000000000
+      internalID: -5285171908669476599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_7
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 643
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4679f7cde5d89f450800000000000000
+      internalID: 6123080606952691556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_8
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 570
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4279adab0b66a4170800000000000000
+      internalID: 8163450183797610276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_9
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 570
+        width: 49
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf4c196adc5dacc50800000000000000
+      internalID: 6686391676024505596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_10
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 570
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5a6e4daf554f1cb0800000000000000
+      internalID: -4891114393069262246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_11
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 570
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dcf28e13f580f570800000000000000
+      internalID: 8498439776083573976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_12
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 570
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb41272d1cfc582e0800000000000000
+      internalID: -2124063217868991297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 443
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fab41ef788fd007a0800000000000000
+      internalID: -6412880092021568593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_14
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 443
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7656f8b0e8f6bb0800000000000000
+      internalID: -4940574085900572733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_15
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 516
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a665303dbb095b10800000000000000
+      internalID: 1970619219136833192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_16
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 443
+        width: 25
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5174e76b5fe6d30800000000000000
+      internalID: 4426745647903217070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_17
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 443
+        width: 25
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d1f626479c49700800000000000000
+      internalID: 546282956523511168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_18
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 516
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a45803eb5830f7150800000000000000
+      internalID: 5872416312070800714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_19
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 443
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c559f4dd06f58770800000000000000
+      internalID: 8612560401684059589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_20
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 443
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d229478df5bd9bf0800000000000000
+      internalID: -315896298344996136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_21
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 443
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd7d2784fec905dc0800000000000000
+      internalID: -3652246746270869540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_22
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 516
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4579e12989a775980800000000000000
+      internalID: -8550230571834501292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_23
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 443
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e6319f718f895200800000000000000
+      internalID: 169324247356880617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_24
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 443
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a908f3519f84ea10800000000000000
+      internalID: 1937831594017950120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_25
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 443
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a92df1924b1e26f10800000000000000
+      internalID: 2261618126793724570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_26
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 443
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5b159735487ccac0800000000000000
+      internalID: -3833556944118539427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_27
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 443
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a769526653b894760800000000000000
+      internalID: 7442632920669722234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_28
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 389
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3f842c975bf67be0800000000000000
+      internalID: -1479719073844261061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_29
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 316
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa65737f27ede4420800000000000000
+      internalID: 2616273018904073898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_30
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 315
+        width: 51
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d289fef053dfcb0800000000000000
+      internalID: -4828644882910794352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_31
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 315
+        width: 49
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5e03b6600785650800000000000000
+      internalID: 6221846058082821584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_32
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 316
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f07b15880ea96e50800000000000000
+      internalID: 6803160063735984373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_33
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 316
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 640406ac99e72d030800000000000000
+      internalID: 3518013457920180294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_34
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 315
+        width: 51
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b420c27aa923ec20800000000000000
+      internalID: 3234474769428522161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_35
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 316
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 558d215d2290d9ad0800000000000000
+      internalID: -2693986956889368491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_36
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 315
+        width: 49
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7133fddd6df4c1c70800000000000000
+      internalID: 8943110744314950423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_37
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 316
+        width: 25
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad7c13b0ac1cef0e0800000000000000
+      internalID: -2234135291613820966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_38
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 315
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c5e269c6621a830800000000000000
+      internalID: 4080584985192324182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_39
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 307
+        width: 51
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03d1a2a034d080a70800000000000000
+      internalID: 8793292854025395504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_40
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 180
+        width: 51
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a89d705aa92ec990800000000000000
+      internalID: -7363902529232594780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_41
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 188
+        width: 51
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc792ec6a89d8b40800000000000000
+      internalID: 5444175366751616254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_42
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 188
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758355800b06c7400800000000000000
+      internalID: 323239582434146391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_43
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 188
+        width: 51
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2c81eb1b7fbca60800000000000000
+      internalID: 7695516731063190260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_44
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 188
+        width: 51
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f86d58e121a6e50d0800000000000000
+      internalID: -3432189239955695985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_45
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 189
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b036d9e7eaaf06ee0800000000000000
+      internalID: -1269739467562982645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_46
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 189
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ad261773906a8f40800000000000000
+      internalID: 5731499662256778662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_47
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 62
+        width: 51
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4d912659f85e48a0800000000000000
+      internalID: -6319015399239082674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_48
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 62
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1484c8f01fbb3c3c0800000000000000
+      internalID: -4340418971832661951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_49
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 62
+        width: 51
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d809ded89101aff0800000000000000
+      internalID: -26738366702090026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_50
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 62
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26cc971d0dd676410800000000000000
+      internalID: 1470264546994801762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_51
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 62
+        width: 36
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4fa091d398203a0800000000000000
+      internalID: -6700642400067717889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_52
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 62
+        width: 49
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31ec852341eb66560800000000000000
+      internalID: 7306736439408512531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_53
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 62
+        width: 35
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f7dc9abb7d135c0800000000000000
+      internalID: -4237368573371252918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_54
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 62
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38e3598d20c13fe10800000000000000
+      internalID: 2230157039027699331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_55
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 62
+        width: 51
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1135c2d2a0e3852d0800000000000000
+      internalID: -3289811314365672687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trillionaire_56
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 62
+        width: 51
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9b245e495eeff50800000000000000
+      internalID: 6917218505351936494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      trillionaire_0: 2915791535617773336
+      trillionaire_1: -1560067966315261334
+      trillionaire_10: -4891114393069262246
+      trillionaire_11: 8498439776083573976
+      trillionaire_12: -2124063217868991297
+      trillionaire_13: -6412880092021568593
+      trillionaire_14: -4940574085900572733
+      trillionaire_15: 1970619219136833192
+      trillionaire_16: 4426745647903217070
+      trillionaire_17: 546282956523511168
+      trillionaire_18: 5872416312070800714
+      trillionaire_19: 8612560401684059589
+      trillionaire_2: -1783644982255258022
+      trillionaire_20: -315896298344996136
+      trillionaire_21: -3652246746270869540
+      trillionaire_22: -8550230571834501292
+      trillionaire_23: 169324247356880617
+      trillionaire_24: 1937831594017950120
+      trillionaire_25: 2261618126793724570
+      trillionaire_26: -3833556944118539427
+      trillionaire_27: 7442632920669722234
+      trillionaire_28: -1479719073844261061
+      trillionaire_29: 2616273018904073898
+      trillionaire_3: -7475133407770625142
+      trillionaire_30: -4828644882910794352
+      trillionaire_31: 6221846058082821584
+      trillionaire_32: 6803160063735984373
+      trillionaire_33: 3518013457920180294
+      trillionaire_34: 3234474769428522161
+      trillionaire_35: -2693986956889368491
+      trillionaire_36: 8943110744314950423
+      trillionaire_37: -2234135291613820966
+      trillionaire_38: 4080584985192324182
+      trillionaire_39: 8793292854025395504
+      trillionaire_4: 1027351748539997049
+      trillionaire_40: -7363902529232594780
+      trillionaire_41: 5444175366751616254
+      trillionaire_42: 323239582434146391
+      trillionaire_43: 7695516731063190260
+      trillionaire_44: -3432189239955695985
+      trillionaire_45: -1269739467562982645
+      trillionaire_46: 5731499662256778662
+      trillionaire_47: -6319015399239082674
+      trillionaire_48: -4340418971832661951
+      trillionaire_49: -26738366702090026
+      trillionaire_5: 1566912689356516540
+      trillionaire_50: 1470264546994801762
+      trillionaire_51: -6700642400067717889
+      trillionaire_52: 7306736439408512531
+      trillionaire_53: -4237368573371252918
+      trillionaire_54: 2230157039027699331
+      trillionaire_55: -3289811314365672687
+      trillionaire_56: 6917218505351936494
+      trillionaire_6: -5285171908669476599
+      trillionaire_7: 6123080606952691556
+      trillionaire_8: 8163450183797610276
+      trillionaire_9: 6686391676024505596
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

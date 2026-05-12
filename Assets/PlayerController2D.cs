@@ -13,6 +13,7 @@ public class PlayerController2D : MonoBehaviour
     [Header("State")]
     public bool inputEnabled = false;
 
+
     [Header("INPUT (Rebindable)")]
     public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
@@ -59,6 +60,7 @@ public class PlayerController2D : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public PlayerDebugText debugText;
     public Animator animator;
+    public PlayerMovementAudio movementAudio;  // ADD THIS
 
     [Header("Weapon")]
     public Transform firePoint;
@@ -68,6 +70,7 @@ public class PlayerController2D : MonoBehaviour
     private Vector3 weaponHolderDefaultLocalPos;
 
     private SpriteRenderer[] childSprites;
+
 
     [HideInInspector]
     public bool facingRight = true;
@@ -82,6 +85,10 @@ public class PlayerController2D : MonoBehaviour
     void Start()
     {
         combat = GetComponent<PlayerCombat>();
+
+        // ADD THIS - Auto-find if not assigned
+        if (movementAudio == null)
+            movementAudio = GetComponent<PlayerMovementAudio>();
 
         // Cache all sprite renderers
         childSprites =
@@ -167,6 +174,12 @@ public class PlayerController2D : MonoBehaviour
                 {
                     animator.ResetTrigger("Jump");
                     animator.SetTrigger("Jump");
+                }
+
+                // ADD THIS - Trigger jump sound
+                if (movementAudio != null)
+                {
+                    movementAudio.PlayJumpSound();
                 }
             }
         }
@@ -262,11 +275,17 @@ public class PlayerController2D : MonoBehaviour
             ? 1f
             : airControl;
 
-        rb.linearVelocity =
-            new Vector2(
-                moveInput * moveSpeed * control,
-                rb.linearVelocity.y
-            );
+        float targetSpeed =
+            moveInput * moveSpeed * control;
+
+        rb.linearVelocity = new Vector2(
+            Mathf.Lerp(
+                rb.linearVelocity.x,
+                targetSpeed,
+                12f * Time.fixedDeltaTime
+            ),
+            rb.linearVelocity.y
+        );
     }
 
     void HandleJumpHold()

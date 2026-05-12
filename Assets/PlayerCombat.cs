@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -11,8 +12,17 @@ public class PlayerCombat : MonoBehaviour
     [Header("Weapon Visual")]
     public Transform weaponHolder;
 
+    public Transform muzzleFlash;
     private GameObject currentWeaponVisual;
 
+    [Header("Muzzle Flash")]
+    public GameObject muzzleFlashObject;
+    public float muzzleFlashDuration = 0.05f;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+
+    private Coroutine muzzleFlashRoutine;
     private PlayerController2D controller;
     private WeaponData startingWeapon;
 
@@ -21,6 +31,8 @@ public class PlayerCombat : MonoBehaviour
     private bool isFiring = false;
 
     private int currentAmmo;
+
+    public float weaponOffsetX = 0f;
 
     void Awake()
     {
@@ -32,54 +44,198 @@ public class PlayerCombat : MonoBehaviour
         controller = GetComponent<PlayerController2D>();
 
         if (currentWeapon != null)
-        {
             currentAmmo = currentWeapon.magazineSize;
-
-            if (debugText != null)
-                debugText.SetWeapon(currentWeapon.weaponName);
-        }
 
         UpdateWeaponVisual();
     }
 
     void Update()
     {
-        if (currentWeapon != null)
-            UpdateFireUI();
+        UpdateFireUI();
     }
 
+    // -----------------------------
+    // SHOOT INPUT
+    // -----------------------------
     public void TryShoot(bool held)
     {
         if (currentWeapon == null)
             return;
 
-        bool shouldFire =
-            currentWeapon.automatic
-            ? held
-            : !held;
+        bool shouldFire = currentWeapon.automatic ? held : !held;
 
         if (shouldFire)
             Attack();
     }
 
-    void UpdateFireUI()
+    void Attack()
     {
-        if (debugText != null)
-            debugText.SetFiring(isFiring);
+        if (!canShoot || reloading || isFiring)
+            return;
+
+        StartCoroutine(ShootRoutine());
     }
 
+    // -----------------------------
+    // SHOOT ROUTINE
+    // -----------------------------
+    IEnumerator ShootRoutine()
+    {
+        isFiring = true;
+        canShoot = false;
+
+        // 🔊 FIRE SOUND
+        if (currentWeapon.fireSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(currentWeapon.fireSound, currentWeapon.fireVolume);
+        }
+
+        TriggerMuzzleFlash();
+
+        Vector2 baseDirection =
+            controller.facingRight ? Vector2.right : Vector2.left;
+
+        List<Collider2D> spawnedBulletColliders = new List<Collider2D>();
+
+        for (int i = 0; i < currentWeapon.projectileCount; i++)
+        {
+            float spread = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
+
+            Vector2 finalDirection = Quaternion.Euler(0, 0, spread) * baseDirection;
+
+            float angle = Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
+
+            GameObject bullet = Instantiate(
+                currentWeapon.projectilePrefab,
+                firePoint.position,
+                Quaternion.Euler(0, 0, angle)
+            );
+
+            Projectile projectile = bullet.GetComponent<Projectile>();
+
+            if (projectile != null)
+            {
+                projectile.Initialize(
+                    finalDirection,
+                    currentWeapon.projectileSpeed,
+                    currentWeapon.knockbackForce,
+                    gameObject
+                );
+            }
+
+            Collider2D bulletCol = bullet.GetComponent<Collider2D>();
+
+            if (bulletCol != null)
+            {
+                spawnedBulletColliders.Add(bulletCol);
+
+                foreach (Collider2D ownerCol in GetComponentsInChildren<Collider2D>())
+                {
+                    Physics2D.IgnoreCollision(bulletCol, ownerCol);
+                }
+            }
+        }
+
+        // bullet vs bullet ignore
+        for (int i = 0; i < spawnedBulletColliders.Count; i++)
+        {
+            for (int j = i + 1; j < spawnedBulletColliders.Count; j++)
+            {
+                Physics2D.IgnoreCollision(spawnedBulletColliders[i], spawnedBulletColliders[j]);
+            }
+        }
+
+        // recoil
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 recoilDirection = (controller.facingRight ? Vector2.left : Vector2.right);
+            rb.AddForce(recoilDirection * currentWeapon.recoilForce, ForceMode2D.Impulse);
+        }
+
+        // camera shake
+        DynamicCameraFocus2D cam = Camera.main.GetComponent<DynamicCameraFocus2D>();
+
+        if (cam != null)
+            cam.AddShake(currentWeapon.screenShake);
+
+        // ammo
+        currentAmmo--;
+
+        // -----------------------------
+        // RELOAD (FIXED - ONLY ONCE)
+        // -----------------------------
+        if (currentAmmo <= 0 && !reloading)
+        {
+            reloading = true;
+
+            if (debugText != null)
+                debugText.SetReloading(true);
+
+            if (currentWeapon.reloadSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(currentWeapon.reloadSound, currentWeapon.reloadVolume);
+            }
+
+            yield return new WaitForSeconds(currentWeapon.reloadTime);
+
+            currentAmmo = currentWeapon.magazineSize;
+            reloading = false;
+
+            if (debugText != null)
+                debugText.SetReloading(false);
+        }
+
+        isFiring = false;
+
+        yield return new WaitForSeconds(currentWeapon.fireRate);
+
+        canShoot = true;
+    }
+
+    // -----------------------------
+    // MUZZLE FLASH
+    // -----------------------------
+    void TriggerMuzzleFlash()
+    {
+        if (muzzleFlashObject == null || firePoint == null || currentWeapon == null)
+            return;
+
+        if (muzzleFlashRoutine != null)
+            StopCoroutine(muzzleFlashRoutine);
+
+        muzzleFlashRoutine = StartCoroutine(MuzzleFlashRoutine());
+
+        muzzleFlashObject.transform.SetParent(firePoint);
+        muzzleFlashObject.transform.localRotation = Quaternion.identity;
+
+        float dir = controller.facingRight ? 1f : -1f;
+
+        Vector3 localPos = Vector3.zero;
+        localPos.x = currentWeapon.muzzleFlashOffsetX * dir;
+
+        muzzleFlashObject.transform.localPosition = localPos;
+    }
+
+    IEnumerator MuzzleFlashRoutine()
+    {
+        muzzleFlashObject.SetActive(true);
+        yield return new WaitForSeconds(muzzleFlashDuration);
+        muzzleFlashObject.SetActive(false);
+    }
+
+    // -----------------------------
+    // WEAPON SYSTEM
+    // -----------------------------
     public void ReplaceWeapon(WeaponData weapon)
     {
         currentWeapon = weapon;
-
         currentAmmo = weapon.magazineSize;
 
         reloading = false;
         isFiring = false;
         canShoot = true;
-
-        if (debugText != null)
-            debugText.SetWeapon(weapon.weaponName);
 
         UpdateWeaponVisual();
     }
@@ -93,156 +249,42 @@ public class PlayerCombat : MonoBehaviour
         canShoot = true;
 
         if (currentWeapon != null)
-        {
             currentAmmo = currentWeapon.magazineSize;
-
-            if (debugText != null)
-                debugText.SetWeapon(currentWeapon.weaponName);
-        }
-        else
-        {
-            currentAmmo = 0;
-
-            if (debugText != null)
-                debugText.SetWeapon("Unarmed");
-        }
-
-        if (debugText != null)
-        {
-            debugText.SetFiring(false);
-            debugText.SetReloading(false);
-        }
 
         UpdateWeaponVisual();
     }
 
-    void Attack()
+    void UpdateFireUI()
     {
-        if (!canShoot || reloading)
-            return;
-
-        StartCoroutine(ShootRoutine());
+        if (debugText != null)
+            debugText.SetFiring(isFiring);
     }
 
-    IEnumerator ShootRoutine()
-    {
-        canShoot = false;
-        isFiring = true;
-
-        Vector2 direction =
-            controller.facingRight
-            ? Vector2.right
-            : Vector2.left;
-
-        GameObject bullet = Instantiate(
-            currentWeapon.projectilePrefab,
-            firePoint.position,
-            Quaternion.identity
-        );
-
-        Projectile projectile =
-            bullet.GetComponent<Projectile>();
-
-        if (projectile != null)
-        {
-            projectile.Initialize(
-                direction,
-                currentWeapon.projectileSpeed,
-                currentWeapon.knockbackForce,
-                gameObject
-            );
-        }
-
-        // Ignore collisions with owner
-        foreach (Collider2D ownerCol in GetComponentsInChildren<Collider2D>())
-        {
-            Collider2D bulletCol =
-                bullet.GetComponent<Collider2D>();
-
-            if (bulletCol != null)
-                Physics2D.IgnoreCollision(
-                    bulletCol,
-                    ownerCol
-                );
-        }
-
-        currentAmmo--;
-
-        isFiring = false;
-
-        // Reload
-        if (currentAmmo <= 0)
-        {
-            reloading = true;
-
-            if (debugText != null)
-                debugText.SetReloading(true);
-
-            yield return new WaitForSeconds(
-                currentWeapon.reloadTime
-            );
-
-            currentAmmo =
-                currentWeapon.magazineSize;
-
-            reloading = false;
-
-            if (debugText != null)
-                debugText.SetReloading(false);
-        }
-
-        yield return new WaitForSeconds(
-            currentWeapon.fireRate
-        );
-
-        canShoot = true;
-    }
-
+    // -----------------------------
+    // VISUALS
+    // -----------------------------
     void UpdateWeaponVisual()
     {
-        // Destroy previous visual
         if (currentWeaponVisual != null)
             Destroy(currentWeaponVisual);
 
-        // Safety checks
-        if (currentWeapon == null)
+        if (currentWeapon == null || weaponHolder == null)
             return;
 
-        if (currentWeapon.weaponSprite == null)
-            return;
+        currentWeaponVisual = new GameObject("WeaponVisual");
+        currentWeaponVisual.transform.SetParent(weaponHolder);
 
-        if (weaponHolder == null)
-        {
-            Debug.LogWarning(
-                "Weapon Holder missing on: " + gameObject.name
-            );
+        float dir = controller.facingRight ? 1f : -1f;
 
-            return;
-        }
+        Vector3 weaponPos = currentWeapon.localPosition;
+        weaponPos.x += weaponOffsetX * dir;
 
-        // Create visual object
-        currentWeaponVisual =
-            new GameObject("WeaponVisual");
+        currentWeaponVisual.transform.localPosition = weaponPos;
+        currentWeaponVisual.transform.localEulerAngles = currentWeapon.localRotation;
+        currentWeaponVisual.transform.localScale = currentWeapon.localScale;
 
-        currentWeaponVisual.transform.SetParent(
-            weaponHolder
-        );
-
-        currentWeaponVisual.transform.localPosition =
-            currentWeapon.localPosition;
-
-        currentWeaponVisual.transform.localEulerAngles =
-            currentWeapon.localRotation;
-
-        currentWeaponVisual.transform.localScale =
-            currentWeapon.localScale;
-
-        SpriteRenderer sr =
-            currentWeaponVisual.AddComponent<SpriteRenderer>();
-
+        SpriteRenderer sr = currentWeaponVisual.AddComponent<SpriteRenderer>();
         sr.sprite = currentWeapon.weaponSprite;
-
-        // Optional sorting setup
         sr.sortingLayerName = "Player";
         sr.sortingOrder = 10;
     }
