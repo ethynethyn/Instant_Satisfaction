@@ -29,7 +29,7 @@ MonoBehaviour:
   automatic: 0
   screenShake: 0.05
   muzzleFlashOffsetX: 1
-  fireSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: aa64ad0f3b162d94f8bf903341ee8501, type: 3}
+  reloadSound: {fileID: 8300000, guid: 103152d6887915340a27bfb34a24d9a9, type: 3}
   fireVolume: 1
   reloadVolume: 1

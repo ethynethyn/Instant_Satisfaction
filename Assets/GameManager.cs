@@ -28,6 +28,19 @@ public class GameManager : MonoBehaviour
     [Header("Winner Cameras")]
     public Camera mainCamera;
 
+    [Header("Pre Fight Countdown")]
+    public GameObject countdown3Object;
+    public GameObject countdown2Object;
+    public GameObject countdown1Object;
+    public GameObject fightObject;
+
+    [Tooltip("Objects enabled during countdown")]
+    public List<GameObject> preFightObjects =
+        new List<GameObject>();
+
+    public float countdownNumberDuration = 1f;
+    public float fightDuration = 0.8f;
+
     [Header("Game Over")]
     public GameObject gameOverObject;
 
@@ -274,6 +287,9 @@ public class GameManager : MonoBehaviour
 
         ClearWeapons();
 
+        // Disable countdown visuals initially
+        HideCountdownObjects();
+
         // Build list of players still alive in the match
         List<PlayerHealth> survivingPlayers =
             new List<PlayerHealth>();
@@ -323,7 +339,10 @@ public class GameManager : MonoBehaviour
                 player.GetComponent<Rigidbody2D>();
 
             if (rb != null)
+            {
                 rb.bodyType = RigidbodyType2D.Dynamic;
+                rb.linearVelocity = Vector2.zero;
+            }
 
             PlayerController2D controller =
                 player.GetComponent<PlayerController2D>();
@@ -331,8 +350,106 @@ public class GameManager : MonoBehaviour
             if (controller != null)
             {
                 controller.enabled = true;
+
+                // IMPORTANT
+                // players spawned but cannot move yet
+                controller.inputEnabled = false;
+            }
+        }
+
+        StartCoroutine(PreFightCountdownRoutine());
+    }
+
+    IEnumerator PreFightCountdownRoutine()
+    {
+        // Enable pre-fight objects
+        SetPreFightObjects(true);
+
+        // 3
+        ShowOnlyCountdownObject(countdown3Object);
+
+        yield return new WaitForSeconds(
+            countdownNumberDuration
+        );
+
+        // 2
+        ShowOnlyCountdownObject(countdown2Object);
+
+        yield return new WaitForSeconds(
+            countdownNumberDuration
+        );
+
+        // 1
+        ShowOnlyCountdownObject(countdown1Object);
+
+        yield return new WaitForSeconds(
+            countdownNumberDuration
+        );
+
+        // FIGHT
+        ShowOnlyCountdownObject(fightObject);
+
+        // EXTRA HOLD TIME (no new variables)
+        yield return new WaitForSeconds(1f);
+        // ↑ change this number whenever you want extra “dramatic pause”
+
+        // ENABLE PLAYER INPUT
+        foreach (PlayerHealth p in activePlayers)
+        {
+            if (p == null || !p.gameObject.activeSelf)
+                continue;
+
+            PlayerController2D controller =
+                p.GetComponent<PlayerController2D>();
+
+            if (controller != null)
+            {
                 controller.inputEnabled = true;
             }
+        }
+
+        // optional: let FIGHT linger slightly longer visually
+        yield return new WaitForSeconds(fightDuration);
+
+        yield return new WaitForSeconds(
+            fightDuration
+        );
+
+        HideCountdownObjects();
+
+        // Disable pre-fight objects
+        SetPreFightObjects(false);
+    }
+
+    void ShowOnlyCountdownObject(GameObject target)
+    {
+        HideCountdownObjects();
+
+        if (target != null)
+            target.SetActive(true);
+    }
+
+    void HideCountdownObjects()
+    {
+        if (countdown3Object != null)
+            countdown3Object.SetActive(false);
+
+        if (countdown2Object != null)
+            countdown2Object.SetActive(false);
+
+        if (countdown1Object != null)
+            countdown1Object.SetActive(false);
+
+        if (fightObject != null)
+            fightObject.SetActive(false);
+    }
+
+    void SetPreFightObjects(bool state)
+    {
+        foreach (GameObject obj in preFightObjects)
+        {
+            if (obj != null)
+                obj.SetActive(state);
         }
     }
 

@@ -27,6 +27,14 @@ public class Projectile : MonoBehaviour
     [Header("Projectile")]
     public float maxDistance = 10f;
 
+    [Header("Ricochet")]
+    public string[] ricochetTags;
+
+    [Tooltip("Random angle added to ricochets")]
+    public float ricochetSpread = 25f;
+
+    private int remainingRicochets;
+
     [Header("Audio")]
     [Range(0f, 2f)]
     public float masterImpactVolume = 1f;
@@ -49,7 +57,8 @@ public class Projectile : MonoBehaviour
         Vector2 dir,
         float projectileSpeed,
         float kb,
-        GameObject ownerObject
+        GameObject ownerObject,
+        int ricochetCount = 0
     )
     {
         direction = dir.normalized;
@@ -58,26 +67,16 @@ public class Projectile : MonoBehaviour
 
         knockback = kb;
 
+        remainingRicochets = ricochetCount;
+
         ownerInstanceID = ownerObject
-            .GetComponentInParent<Transform>()
-            .root
+            .transform.root
             .gameObject
             .GetInstanceID();
 
         startPos = transform.position;
 
-        // ROTATE PROJECTILE TO MATCH DIRECTION
-        float angle =
-            Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation =
-            Quaternion.Euler(0, 0, angle);
-
-        // OPTIONAL SPRITE FLIP
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.flipY = direction.x < 0;
-        }
+        UpdateRotation();
     }
 
     void Update()
@@ -87,7 +86,10 @@ public class Projectile : MonoBehaviour
 
         if (Vector3.Distance(startPos, transform.position) >= maxDistance)
         {
-            Debug.Log("Projectile destroyed: max distance reached");
+            Debug.Log(
+                "Projectile destroyed: max distance reached"
+            );
+
             Destroy(gameObject);
         }
     }
@@ -96,7 +98,7 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("Projectile hit: " + other.name);
 
-        // IGNORE OWNER COLLISION
+        // IGNORE OWNER
         int hitRootID =
             other.transform.root.gameObject.GetInstanceID();
 
@@ -109,7 +111,7 @@ public class Projectile : MonoBehaviour
         // PLAY IMPACT SOUND
         PlayImpactSound(other);
 
-        // CHECK FOR PLAYER HEALTH
+        // PLAYER HIT
         PlayerHealth health =
             other.GetComponentInParent<PlayerHealth>();
 
@@ -128,11 +130,99 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        // CHECK RICOCHET TAGS
+        bool ricochetSurface = false;
+
+        foreach (string tag in ricochetTags)
+        {
+            if (other.CompareTag(tag))
+            {
+                ricochetSurface = true;
+                break;
+            }
+        }
+
+        // RICOCHET
+        if (ricochetSurface &&
+            remainingRicochets > 0)
+        {
+            remainingRicochets--;
+
+            Vector2 normal =
+                GetCollisionNormal(other);
+
+            // PERFECT REFLECTION
+            Vector2 reflectedDirection =
+                Vector2.Reflect(
+                    direction,
+                    normal
+                ).normalized;
+
+            // RANDOMIZED ANGLE
+            float randomAngle =
+                Random.Range(
+                    -ricochetSpread,
+                    ricochetSpread
+                );
+
+            reflectedDirection =
+                Quaternion.Euler(
+                    0,
+                    0,
+                    randomAngle
+                ) * reflectedDirection;
+
+            direction =
+                reflectedDirection.normalized;
+
+            // PUSH PROJECTILE OUT
+            // prevents instant re-collision
+            transform.position +=
+                (Vector3)(direction * 0.05f);
+
+            UpdateRotation();
+
+            Debug.Log(
+                "Ricochet! Remaining: "
+                + remainingRicochets
+            );
+
+            return;
+        }
+
         Debug.Log(
             "No PlayerHealth found — destroying projectile"
         );
 
         Destroy(gameObject);
+    }
+
+    Vector2 GetCollisionNormal(Collider2D other)
+    {
+        Vector2 closestPoint =
+            other.ClosestPoint(transform.position);
+
+        Vector2 normal =
+            ((Vector2)transform.position - closestPoint)
+            .normalized;
+
+        return normal;
+    }
+
+    void UpdateRotation()
+    {
+        float angle =
+            Mathf.Atan2(direction.y, direction.x)
+            * Mathf.Rad2Deg;
+
+        transform.rotation =
+            Quaternion.Euler(0, 0, angle);
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipY =
+                direction.x < 0;
+        }
     }
 
     private void PlayImpactSound(Collider2D other)
@@ -148,7 +238,8 @@ public class Projectile : MonoBehaviour
                 other.CompareTag(collision.tagName);
 
             bool layerMatch =
-                ((1 << other.gameObject.layer) & collision.layers) != 0;
+                ((1 << other.gameObject.layer) &
+                collision.layers) != 0;
 
             if (tagMatch || layerMatch)
             {
@@ -157,11 +248,15 @@ public class Projectile : MonoBehaviour
                 {
                     clipToPlay =
                         collision.sounds[
-                            Random.Range(0, collision.sounds.Length)
+                            Random.Range(
+                                0,
+                                collision.sounds.Length
+                            )
                         ];
 
                     finalVolume =
-                        collision.volume * masterImpactVolume;
+                        collision.volume *
+                        masterImpactVolume;
 
                     break;
                 }
@@ -176,7 +271,6 @@ public class Projectile : MonoBehaviour
         if (clipToPlay == null)
             return;
 
-        // CREATE TEMP AUDIO OBJECT
         GameObject tempAudio =
             new GameObject("ImpactSound");
 
@@ -188,10 +282,9 @@ public class Projectile : MonoBehaviour
 
         source.clip = clipToPlay;
 
-        // IMPORTANT SETTINGS
         source.volume = finalVolume;
 
-        source.spatialBlend = 0f; // FULL 2D SOUND
+        source.spatialBlend = 0f;
 
         source.rolloffMode =
             AudioRolloffMode.Linear;

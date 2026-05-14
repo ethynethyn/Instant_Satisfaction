@@ -20,8 +20,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6895167356829100281, guid: 45882d15c72d6cb4ea23663598b3ae08, type: 3}
   fireRate: 0.3
   projectileSpeed: 30
-  knockbackForce: 10
-  recoilForce: 20
+  knockbackForce: 25
+  recoilForce: 50
   spreadAngle: 13
   projectileCount: 8
   magazineSize: 5

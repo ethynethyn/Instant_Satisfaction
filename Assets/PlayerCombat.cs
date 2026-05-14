@@ -116,11 +116,12 @@ public class PlayerCombat : MonoBehaviour
             if (projectile != null)
             {
                 projectile.Initialize(
-                    finalDirection,
-                    currentWeapon.projectileSpeed,
-                    currentWeapon.knockbackForce,
-                    gameObject
-                );
+     finalDirection,
+     currentWeapon.projectileSpeed,
+     currentWeapon.knockbackForce,
+     gameObject,
+     currentWeapon.ricochetCount
+ );
             }
 
             Collider2D bulletCol = bullet.GetComponent<Collider2D>();

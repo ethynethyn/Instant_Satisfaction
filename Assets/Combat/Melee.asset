@@ -28,3 +28,8 @@ MonoBehaviour:
   reloadTime: 0
   automatic: 0
   screenShake: 0.05
+  muzzleFlashOffsetX: 0.2
+  fireSound: {fileID: 8300000, guid: f62c27bc17d91f747904ec03d50a4b2f, type: 3}
+  reloadSound: {fileID: 0}
+  fireVolume: 1
+  reloadVolume: 1

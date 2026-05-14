@@ -21,6 +21,7 @@ MonoBehaviour:
   fireRate: 0.2
   projectileSpeed: 30
   knockbackForce: 10
+  ricochetCount: 0
   recoilForce: 5
   spreadAngle: 5
   projectileCount: 1
@@ -29,7 +30,7 @@ MonoBehaviour:
   automatic: 1
   screenShake: 0.05
   muzzleFlashOffsetX: 2.7
-  fireSound: {fileID: 8300000, guid: 338340c2afec01e4fb41db2591130dbb, type: 3}
-  reloadSound: {fileID: 8300000, guid: 382cf075f76a9cb45b915fac6ee123ad, type: 3}
+  fireSound: {fileID: 8300000, guid: 4fe2a3ab8576e6a46860f5411824b622, type: 3}
+  reloadSound: {fileID: 8300000, guid: ffc42029b8c82e94f87ee4ac6186260e, type: 3}
   fireVolume: 1
   reloadVolume: 1

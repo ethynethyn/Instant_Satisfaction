@@ -19,6 +19,8 @@ public class WeaponData : ScriptableObject
     public float fireRate = 0.2f;
     public float projectileSpeed = 20f;
     public float knockbackForce = 10f;
+    [Header("Ricochet")]
+    public int ricochetCount = 0;
 
     [Header("Recoil")]
     public float recoilForce = 5f;

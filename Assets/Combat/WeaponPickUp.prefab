@@ -102,8 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possibleWeapons:
-  - {fileID: 11400000, guid: 11c21f34afa341b40b957d66453f6d75, type: 2}
+  - {fileID: 11400000, guid: 27ec7a7556ffadf42acf47878f933364, type: 2}
   - {fileID: 11400000, guid: 0b55a48cbb0942c47a0c29d4f74cd303, type: 2}
+  - {fileID: 11400000, guid: 11c21f34afa341b40b957d66453f6d75, type: 2}
   - {fileID: 11400000, guid: 6b3cb8ed53e974349bf5526944b76d28, type: 2}
 --- !u!58 &7344544139596260375
 CircleCollider2D:

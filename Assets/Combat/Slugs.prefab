@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2806551861cab7544b26c921caa6ac35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 100
+  maxDistance: 5
   masterImpactVolume: 2
   defaultImpactSound: {fileID: 0}
   collisionSounds:
