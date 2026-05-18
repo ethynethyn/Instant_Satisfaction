@@ -49,4 +49,10 @@ public class WeaponData : ScriptableObject
     public AudioClip reloadSound;
     [Range(0f, 1f)] public float fireVolume = 1f;
     [Range(0f, 1f)] public float reloadVolume = 1f;
+
+    [Header("Pickup Audio")]
+    public AudioClip pickupSound;
+
+    [Range(0f, 1f)]
+    public float pickupVolume = 1f;
 }

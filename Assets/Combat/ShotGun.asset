@@ -21,6 +21,7 @@ MonoBehaviour:
   fireRate: 0.3
   projectileSpeed: 30
   knockbackForce: 25
+  ricochetCount: 0
   recoilForce: 50
   spreadAngle: 13
   projectileCount: 8
@@ -33,3 +34,5 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: b15b9111f2558f84da7156b0c78db778, type: 3}
   fireVolume: 1
   reloadVolume: 1
+  pickupSound: {fileID: 8300000, guid: 80f0bf4be9785f24682142cff4671591, type: 3}
+  pickupVolume: 1

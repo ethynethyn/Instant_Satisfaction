@@ -17,6 +17,17 @@ public class Projectile : MonoBehaviour
         public float volume = 1f;
     }
 
+    [System.Serializable]
+    public class CollisionParticle
+    {
+        [Header("Detection")]
+        public string tagName;
+        public LayerMask layers;
+
+        [Header("Particles")]
+        public GameObject[] particlePrefabs;
+    }
+
     private Vector2 direction;
     private float speed;
     private float knockback;
@@ -26,6 +37,13 @@ public class Projectile : MonoBehaviour
 
     [Header("Projectile")]
     public float maxDistance = 10f;
+
+    [Header("Impact Particles")]
+    public GameObject defaultImpactParticle;
+
+    [Tooltip("Different particles for different tags/layers")]
+    public List<CollisionParticle> collisionParticles =
+        new List<CollisionParticle>();
 
     [Header("Ricochet")]
     public string[] ricochetTags;
@@ -110,6 +128,9 @@ public class Projectile : MonoBehaviour
 
         // PLAY IMPACT SOUND
         PlayImpactSound(other);
+
+        // SPAWN IMPACT PARTICLES
+        SpawnImpactParticles(other);
 
         // PLAYER HIT
         PlayerHealth health =
@@ -222,6 +243,82 @@ public class Projectile : MonoBehaviour
         {
             spriteRenderer.flipY =
                 direction.x < 0;
+        }
+    }
+
+    private void SpawnImpactParticles(Collider2D other)
+    {
+        GameObject particlePrefab = null;
+
+        foreach (CollisionParticle collision in collisionParticles)
+        {
+            bool tagMatch =
+                !string.IsNullOrEmpty(collision.tagName) &&
+                other.CompareTag(collision.tagName);
+
+            bool layerMatch =
+                ((1 << other.gameObject.layer) &
+                collision.layers) != 0;
+
+            if (tagMatch || layerMatch)
+            {
+                if (collision.particlePrefabs != null &&
+                    collision.particlePrefabs.Length > 0)
+                {
+                    particlePrefab =
+                        collision.particlePrefabs[
+                            Random.Range(
+                                0,
+                                collision.particlePrefabs.Length
+                            )
+                        ];
+
+                    break;
+                }
+            }
+        }
+
+        if (particlePrefab == null)
+        {
+            particlePrefab = defaultImpactParticle;
+        }
+
+        if (particlePrefab == null)
+            return;
+
+        Vector2 hitPoint =
+            other.ClosestPoint(transform.position);
+
+        Vector2 normal =
+            GetCollisionNormal(other);
+
+        Quaternion rotation =
+            Quaternion.LookRotation(
+                Vector3.forward,
+                normal
+            );
+
+        GameObject particles =
+            Instantiate(
+                particlePrefab,
+                hitPoint,
+                rotation
+            );
+
+        ParticleSystem ps =
+            particles.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            Destroy(
+                particles,
+                ps.main.duration +
+                ps.main.startLifetime.constantMax
+            );
+        }
+        else
+        {
+            Destroy(particles, 5f);
         }
     }
 

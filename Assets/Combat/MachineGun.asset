@@ -34,3 +34,5 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: ffc42029b8c82e94f87ee4ac6186260e, type: 3}
   fireVolume: 1
   reloadVolume: 1
+  pickupSound: {fileID: 8300000, guid: b930ea8602091a94db5dda2383a88fec, type: 3}
+  pickupVolume: 1

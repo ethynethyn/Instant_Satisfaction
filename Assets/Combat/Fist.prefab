@@ -103,6 +103,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 1
+  defaultImpactParticle: {fileID: 0}
+  collisionParticles:
+  - tagName: Player
+    layers:
+      serializedVersion: 2
+      m_Bits: 8
+    particlePrefabs:
+    - {fileID: 1989071412124222101, guid: 5c18ee2ffc64adb4ab987f8417f7ab4d, type: 3}
+  ricochetTags: []
+  ricochetSpread: 25
   masterImpactVolume: 2
   defaultImpactSound: {fileID: 0}
   collisionSounds:

@@ -13,16 +13,25 @@ public class WeaponPickup : MonoBehaviour
         {
             selectedWeapon =
                 possibleWeapons[
-                    Random.Range(0, possibleWeapons.Length)
+                    Random.Range(
+                        0,
+                        possibleWeapons.Length
+                    )
                 ];
 
-            Debug.Log("Spawned weapon: " + selectedWeapon.weaponName);
+            Debug.Log(
+                "Spawned weapon: "
+                + selectedWeapon.weaponName
+            );
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger hit: " + other.name);
+        Debug.Log(
+            "Trigger hit: "
+            + other.name
+        );
 
         PlayerCombat combat =
             other.GetComponentInParent<PlayerCombat>();
@@ -65,12 +74,59 @@ public class WeaponPickup : MonoBehaviour
         }
 
         Debug.Log(
-            "Equipping weapon: " +
-            selectedWeapon.weaponName
+            "Equipping weapon: "
+            + selectedWeapon.weaponName
         );
 
+        // PLAY PICKUP SOUND
+        PlayPickupSound();
+
+        // EQUIP WEAPON
         combat.ReplaceWeapon(selectedWeapon);
 
         Destroy(gameObject);
+    }
+
+    void PlayPickupSound()
+    {
+        if (selectedWeapon == null)
+            return;
+
+        if (selectedWeapon.pickupSound == null)
+            return;
+
+        GameObject tempAudio =
+            new GameObject("WeaponPickupAudio");
+
+        tempAudio.transform.position =
+            transform.position;
+
+        AudioSource source =
+            tempAudio.AddComponent<AudioSource>();
+
+        source.clip =
+            selectedWeapon.pickupSound;
+
+        source.volume =
+            selectedWeapon.pickupVolume;
+
+        source.spatialBlend = 0f;
+
+        source.rolloffMode =
+            AudioRolloffMode.Linear;
+
+        source.playOnAwake = false;
+
+        source.loop = false;
+
+        source.pitch =
+            Random.Range(0.98f, 1.02f);
+
+        source.Play();
+
+        Destroy(
+            tempAudio,
+            selectedWeapon.pickupSound.length + 0.1f
+        );
     }
 }
