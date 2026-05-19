@@ -252,6 +252,18 @@ public class PlayerCombat : MonoBehaviour
         if (currentWeapon != null)
             currentAmmo = currentWeapon.magazineSize;
 
+        // Stop any in-flight coroutines (shoot, reload, muzzle flash)
+        StopAllCoroutines();
+
+        // Force muzzle flash off — coroutine may have been killed mid-run
+        if (muzzleFlashObject != null)
+            muzzleFlashObject.SetActive(false);
+
+        muzzleFlashRoutine = null;
+
+        if (debugText != null)
+            debugText.ResetDebugState();
+
         UpdateWeaponVisual();
     }
 
@@ -288,5 +300,41 @@ public class PlayerCombat : MonoBehaviour
         sr.sprite = currentWeapon.weaponSprite;
         sr.sortingLayerName = "Player";
         sr.sortingOrder = 10;
+
+        // Apply current facing direction immediately so the weapon
+        // is correctly oriented on pickup without needing to move first
+        sr.flipX = !controller.facingRight;
+
+        // Also sync firePoint and weaponHolder positions to current facing
+        ApplyFacingToOffsets(controller.facingRight);
     }
+
+    void ApplyFacingToOffsets(bool facingRight)
+    {
+        PlayerController2D pc = controller;
+        if (pc == null) return;
+
+        if (pc.firePoint != null)
+        {
+            // Read the default local pos via reflection isn't available,
+            // so we just correct the sign of x directly
+            Vector3 p = pc.firePoint.localPosition;
+            p.x = facingRight ? Mathf.Abs(p.x) : -Mathf.Abs(p.x);
+            pc.firePoint.localPosition = p;
+        }
+
+        if (pc.weaponHolder != null)
+        {
+            Vector3 p = pc.weaponHolder.localPosition;
+            p.x = facingRight ? Mathf.Abs(p.x) : -Mathf.Abs(p.x);
+            pc.weaponHolder.localPosition = p;
+        }
+    }
+
+    public void SetWeaponVisualActive(bool active)
+    {
+        if (currentWeaponVisual != null)
+            currentWeaponVisual.SetActive(active);
+    }
+
 }

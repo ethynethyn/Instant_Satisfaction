@@ -1,92 +1,115 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerDebugText : MonoBehaviour
 {
-    public TextMeshProUGUI textUI;
+    [Header("Icons")]
+    public GameObject playerIconObject;
+    public GameObject reloadIconObject;
+    public GameObject winnerIconObject;
 
-    private string weapon = "Unarmed";
+    [Header("Winner Settings")]
+    public float winnerIconDelay = 0.5f;
 
     private PlayerController2D.PlayerState state;
-
     private bool firing;
     private bool reloading;
+    private bool isWinner = false;
 
-    private bool isWinner = false; // 🔥 NEW
+    private PlayerCombat combat;
+
+    private Coroutine winnerRoutine;
+
+    void Start()
+    {
+        combat = GetComponentInParent<PlayerCombat>();
+        ResetDebugState();
+    }
 
     void Update()
     {
-        UpdateText();
+        UpdateIcons();
     }
 
-    public void SetWeapon(string weaponName)
-    {
-        weapon = weaponName;
-    }
+    public void SetState(PlayerController2D.PlayerState newState) => state = newState;
+    public void SetFiring(bool value) => firing = value;
+    public void SetReloading(bool value) => reloading = value;
 
-    public void SetState(PlayerController2D.PlayerState newState)
-    {
-        state = newState;
-    }
-
-    public void SetFiring(bool value)
-    {
-        firing = value;
-    }
-
-    public void SetReloading(bool value)
-    {
-        reloading = value;
-    }
-
-    // 🔥 NEW
     public void SetWinner(bool value)
     {
-        isWinner = value;
+        if (winnerRoutine != null)
+            StopCoroutine(winnerRoutine);
+
+        if (value)
+        {
+            winnerRoutine =
+                StartCoroutine(ShowWinnerDelayed());
+        }
+        else
+        {
+            isWinner = false;
+            UpdateIcons();
+        }
     }
 
-    void UpdateText()
+    IEnumerator ShowWinnerDelayed()
     {
-        // 🔥 HIGHEST PRIORITY
+        yield return new WaitForSeconds(winnerIconDelay);
+
+        isWinner = true;
+        UpdateIcons();
+    }
+
+    public void ResetDebugState()
+    {
+        firing = false;
+        reloading = false;
+        isWinner = false;
+
+        if (winnerRoutine != null)
+            StopCoroutine(winnerRoutine);
+
+        UpdateIcons();
+    }
+
+    void UpdateIcons()
+    {
         if (isWinner)
         {
-            textUI.text = "WINNER";
+            SetPlayerIcon(false);
+            SetReloadIcon(false);
+            SetWinnerIcon(true);
             return;
         }
 
-        // PRIORITY:
-        // Reloading > Firing > Jumping > Dashing > Moving > Weapon
+        SetWinnerIcon(false);
 
         if (reloading)
         {
-            textUI.text = "Reloading";
+            SetPlayerIcon(false);
+            SetReloadIcon(true);
             return;
         }
 
-        if (firing)
-        {
-            textUI.text = "Firing";
-            return;
-        }
+        SetPlayerIcon(true);
+        SetReloadIcon(false);
+    }
 
-        if (state == PlayerController2D.PlayerState.Jumping)
-        {
-            textUI.text = "Jumping";
-            return;
-        }
+    void SetPlayerIcon(bool active)
+    {
+        if (playerIconObject != null)
+            playerIconObject.SetActive(active);
+    }
 
-        if (state == PlayerController2D.PlayerState.Dashing)
-        {
-            textUI.text = "Dashing";
-            return;
-        }
+    void SetReloadIcon(bool active)
+    {
+        if (reloadIconObject != null)
+            reloadIconObject.SetActive(active);
+    }
 
-        if (state == PlayerController2D.PlayerState.Moving)
-        {
-            textUI.text = "Moving";
-            return;
-        }
-
-        textUI.text = weapon;
+    void SetWinnerIcon(bool active)
+    {
+        if (winnerIconObject != null)
+            winnerIconObject.SetActive(active);
     }
 }

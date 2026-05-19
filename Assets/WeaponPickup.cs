@@ -8,6 +8,23 @@ public class WeaponPickup : MonoBehaviour
 
     void Start()
     {
+        // Destroy self if another pickup already exists at this spawn point
+        Collider2D[] overlaps =
+            Physics2D.OverlapCircleAll(
+                transform.position,
+                0.1f
+            );
+
+        foreach (Collider2D col in overlaps)
+        {
+            if (col.gameObject != gameObject &&
+                col.GetComponent<WeaponPickup>() != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         // Initial random weapon for visual/debug
         if (possibleWeapons.Length > 0)
         {
@@ -28,6 +45,7 @@ public class WeaponPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (GameManager.Instance != null && GameManager.Instance.IsRoundOver) return;
         Debug.Log(
             "Trigger hit: "
             + other.name

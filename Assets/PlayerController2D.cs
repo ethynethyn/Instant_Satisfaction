@@ -314,6 +314,28 @@ public class PlayerController2D : MonoBehaviour
             debugText.SetState(currentState);
     }
 
+    public void ResetForRound()
+    {
+        isDashing = false;
+        dashTimer = 0f;
+        dashCooldownTimer = 0f;
+        jumpCount = 0;
+        moveInput = 0f;
+        botJumpHeldThisPhysicsStep = false;
+
+        // Consume any leftover bot inputs
+        externalMoveInput = 0f;
+        externalJump = false;
+        externalJumpHeld = false;
+        externalDash = false;
+        externalShoot = false;
+        externalShootHeld = false;
+
+        currentState = PlayerState.Grounded;
+
+        if (debugText != null)
+            debugText.SetState(currentState);
+    }
     void Flip()
     {
         if (moveInput > 0)

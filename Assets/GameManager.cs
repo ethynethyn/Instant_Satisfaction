@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     [Header("Players")]
     public List<PlayerHealth> players;
 
-    [Header("Round Settings")]
+    [Header("Round Timing")]
     public float roundEndDelay = 1.5f;
+    public float delayBeforeWinnerCam = 0.5f;
     public float roundStartDelay = 2f;
 
     [Header("Camera Settings")]
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
                 debugTexts.Add(dbg);
         }
     }
+
     void SetWinnerText(PlayerHealth winner)
     {
         foreach (PlayerDebugText dbg in debugTexts)
@@ -139,8 +141,6 @@ public class GameManager : MonoBehaviour
                 dbg.SetWinner(false);
         }
     }
-
-
 
     public void ForceMenuState()
     {
@@ -281,6 +281,8 @@ public class GameManager : MonoBehaviour
 
     void StartRound()
     {
+
+
         roundOver = false;
 
         ResetCameraImmediate();
@@ -329,8 +331,18 @@ public class GameManager : MonoBehaviour
                 shuffledSpawns[i].position
             );
 
-            PlayerCombat combat =
-                player.GetComponent<PlayerCombat>();
+            // inside the StartRound spawn loop, replace the existing combat reset block:
+            PlayerCombat combat = player.GetComponent<PlayerCombat>();
+            if (combat != null)
+                combat.ResetForRound();
+
+            PlayerController2D controller = player.GetComponent<PlayerController2D>();
+            if (controller != null)
+            {
+                controller.ResetForRound();   // ← new: clears movement/dash/jump state
+                controller.enabled = true;
+                controller.inputEnabled = false;
+            }
 
             if (combat != null)
                 combat.ResetForRound();
@@ -344,9 +356,7 @@ public class GameManager : MonoBehaviour
                 rb.linearVelocity = Vector2.zero;
             }
 
-            PlayerController2D controller =
-                player.GetComponent<PlayerController2D>();
-
+          
             if (controller != null)
             {
                 controller.enabled = true;
@@ -391,7 +401,6 @@ public class GameManager : MonoBehaviour
 
         // EXTRA HOLD TIME (no new variables)
         yield return new WaitForSeconds(1f);
-        // ↑ change this number whenever you want extra “dramatic pause”
 
         // ENABLE PLAYER INPUT
         foreach (PlayerHealth p in activePlayers)
@@ -590,7 +599,7 @@ public class GameManager : MonoBehaviour
             startPos.z
         );
 
-        float targetSize = 1.4f; // 🔥 desired zoom
+        float targetSize = 1.4f;
 
         float elapsed = 0f;
         bool reachedTarget = false;
@@ -601,21 +610,18 @@ public class GameManager : MonoBehaviour
 
             float t = elapsed / duration;
 
-            // position lerp (smooth + stable)
             mainCamera.transform.position = Vector3.Lerp(
                 mainCamera.transform.position,
                 targetPos,
                 cameraLerpSpeed * Time.deltaTime
             );
 
-            // size lerp (zoom in/out)
             mainCamera.orthographicSize = Mathf.Lerp(
                 mainCamera.orthographicSize,
                 targetSize,
                 cameraLerpSpeed * Time.deltaTime
             );
 
-            // snap condition (prevents micro drift)
             if (!reachedTarget &&
                 Vector3.Distance(mainCamera.transform.position, targetPos) < 0.01f)
             {
@@ -624,7 +630,6 @@ public class GameManager : MonoBehaviour
                 reachedTarget = true;
             }
 
-            // lock once reached
             if (reachedTarget)
             {
                 mainCamera.transform.position = targetPos;
@@ -634,7 +639,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // final safety lock
         mainCamera.transform.position = targetPos;
         mainCamera.orthographicSize = targetSize;
     }
@@ -657,12 +661,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RoundEndSequence()
     {
-        FreezeAllPlayers();
 
+        FreezeAllPlayers();
         CacheDebugTexts();
 
         PlayerHealth winner = null;
-
         foreach (PlayerHealth p in activePlayers)
         {
             if (p != null && p.gameObject.activeSelf)
@@ -675,62 +678,57 @@ public class GameManager : MonoBehaviour
         if (winner != null)
             SetWinnerText(winner);
 
-        Camera targetCam =
-            GetWinnerCamera(winner);
+        Camera targetCam = GetWinnerCamera(winner);
+
+        yield return new WaitForSeconds(delayBeforeWinnerCam);
+
+        // Show win display after the delay, just as camera starts moving
+        if (winner != null)
+        {
+            PlayerWinDisplay winDisplay =
+                winner.GetComponent<PlayerWinDisplay>();
+            if (winDisplay != null)
+                winDisplay.ShowWin();
+        }
 
         if (targetCam != null)
         {
             yield return StartCoroutine(
-                LerpMainCameraTo(
-                    targetCam,
-                    roundEndDelay
-                )
-            );
+                LerpMainCameraTo(targetCam, roundEndDelay));
         }
         else
         {
-            yield return new WaitForSeconds(
-                roundEndDelay
-            );
+            yield return new WaitForSeconds(roundEndDelay);
         }
 
         if (roundEndUI != null)
-        {
-            roundEndUI.ShowRoundEnd(
-                activePlayers,
-                false
-            );
-        }
+            roundEndUI.ShowRoundEnd(activePlayers, false);
 
         ClearWeapons();
 
-        yield return new WaitForSeconds(
-            roundStartDelay
-        );
+        yield return new WaitForSeconds(roundStartDelay);
 
-        ClearWinnerText(); // 🔥 RESET DEBUG TEXT HERE
+        // Clean up win display before next round
+        HideAllWinDisplays();
+
+        ClearWinnerText();
 
         if (roundEndUI != null)
             roundEndUI.Hide();
 
         ResetCameraImmediate();
-
         StartRound();
     }
 
     IEnumerator GameOverSequence(PlayerHealth eliminated)
     {
         FreezeAllPlayers();
-
         CacheDebugTexts();
 
         PlayerHealth winner = null;
-
         foreach (PlayerHealth p in activePlayers)
         {
-            if (p != null &&
-                p != eliminated &&
-                p.currentLives > 0)
+            if (p != null && p != eliminated && p.currentLives > 0)
             {
                 winner = p;
                 break;
@@ -740,58 +738,70 @@ public class GameManager : MonoBehaviour
         if (winner != null)
             SetWinnerText(winner);
 
-        Camera targetCam =
-            GetWinnerCamera(winner);
+        Camera targetCam = GetWinnerCamera(winner);
+
+        yield return new WaitForSeconds(delayBeforeWinnerCam);
+
+        // Show win display after the delay
+        if (winner != null)
+        {
+            PlayerWinDisplay winDisplay =
+                winner.GetComponent<PlayerWinDisplay>();
+            if (winDisplay != null)
+                winDisplay.ShowWin();
+        }
 
         if (targetCam != null)
         {
             yield return StartCoroutine(
-                LerpMainCameraTo(
-                    targetCam,
-                    roundEndDelay
-                )
-            );
+                LerpMainCameraTo(targetCam, roundEndDelay));
         }
         else
         {
-            yield return new WaitForSeconds(
-                roundEndDelay
-            );
+            yield return new WaitForSeconds(roundEndDelay);
         }
 
         ClearWeapons();
 
         if (roundEndUI != null)
         {
-            roundEndUI.ShowRoundEnd(
-                activePlayers,
-                true
+            roundEndUI.ShowRoundEnd(activePlayers, true);
 
-            );
             if (gameOverObject != null)
                 gameOverObject.SetActive(true);
         }
 
-        // 🔥 GAME NOW STAYS ON FINAL SCREEN FOREVER
         gameActive = false;
 
-        // Optional:
-        // wait for escape key to return to menu
         while (!Input.GetKeyDown(KeyCode.Escape))
-        {
             yield return null;
-        }
 
+        HideAllWinDisplays();
         ClearWinnerText();
 
         if (roundEndUI != null)
             roundEndUI.Hide();
 
         ResetCameraImmediate();
-
         ResetAllPlayers();
 
         if (mainMenu != null)
             mainMenu.ReturnToMainMenu();
     }
+
+    void HideAllWinDisplays()
+    {
+        foreach (PlayerHealth p in activePlayers)
+        {
+            if (p == null) continue;
+
+            PlayerWinDisplay winDisplay =
+                p.GetComponent<PlayerWinDisplay>();
+
+            if (winDisplay != null)
+                winDisplay.HideWin();
+        }
+    }
+
+    public bool IsRoundOver => roundOver;
 }

@@ -41,6 +41,7 @@ public class DynamicCameraFocus2D : MonoBehaviour
     private float currentShakeStrength;
     private Vector3 shakeOffset;
 
+
     void Awake()
     {
         cam = GetComponent<Camera>();

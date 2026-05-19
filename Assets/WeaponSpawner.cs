@@ -32,6 +32,7 @@ public class WeaponSpawner : MonoBehaviour
     void SpawnWeapon()
     {
         if (spawnPoints == null || spawnPoints.Count == 0) return;
+        if (GameManager.Instance != null && GameManager.Instance.IsRoundOver) return;
 
         Transform point = spawnPoints[Random.Range(0, spawnPoints.Count)];
         Instantiate(pickupPrefab, point.position, Quaternion.identity);
@@ -47,4 +48,6 @@ public class WeaponSpawner : MonoBehaviour
         if (spawnPoints != null && spawnPoints.Count > 0)
             InvokeRepeating(nameof(SpawnWeapon), spawnInterval, spawnInterval);
     }
+
+
 }

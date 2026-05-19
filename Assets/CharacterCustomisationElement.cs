@@ -15,10 +15,17 @@ public class CustomisationElement : MonoBehaviour
     public GameObject highlightBorder;
 
     private int currentIndex = 0;
+    private string prefsKey;
 
-    public void Initialise()
+    public void Initialise(string playerKey)
     {
-        currentIndex = 0;
+        prefsKey = playerKey + "_" + elementName;
+
+        // Load saved index, default to 0
+        currentIndex = PlayerPrefs.GetInt(prefsKey, 0);
+
+        // Clamp in case options list changed since last save
+        currentIndex = Mathf.Clamp(currentIndex, 0, options.Count - 1);
 
         if (options.Count == 0)
         {
@@ -29,7 +36,7 @@ public class CustomisationElement : MonoBehaviour
         for (int i = 0; i < options.Count; i++)
         {
             if (options[i] != null)
-                options[i].SetActive(i == 0);
+                options[i].SetActive(i == currentIndex);
         }
 
         if (nameText != null)
@@ -40,45 +47,38 @@ public class CustomisationElement : MonoBehaviour
 
     public void Next()
     {
-        // Check if customization is locked
-        if (CustomisationManager.Instance.IsCustomisationLocked())
-            return;
-
-        if (options.Count == 0)
-            return;
+        if (CustomisationManager.Instance.IsCustomisationLocked()) return;
+        if (options.Count == 0) return;
 
         options[currentIndex].SetActive(false);
-
-        currentIndex++;
-
-        if (currentIndex >= options.Count)
-            currentIndex = 0;
-
+        currentIndex = (currentIndex + 1) % options.Count;
         options[currentIndex].SetActive(true);
+
+        Save();
     }
 
     public void Previous()
     {
-        // Check if customization is locked
-        if (CustomisationManager.Instance.IsCustomisationLocked())
-            return;
-
-        if (options.Count == 0)
-            return;
+        if (CustomisationManager.Instance.IsCustomisationLocked()) return;
+        if (options.Count == 0) return;
 
         options[currentIndex].SetActive(false);
-
         currentIndex--;
-
-        if (currentIndex < 0)
-            currentIndex = options.Count - 1;
-
+        if (currentIndex < 0) currentIndex = options.Count - 1;
         options[currentIndex].SetActive(true);
+
+        Save();
     }
 
     public void SetHighlight(bool active)
     {
         if (highlightBorder != null)
             highlightBorder.SetActive(active);
+    }
+
+    void Save()
+    {
+        if (!string.IsNullOrEmpty(prefsKey))
+            PlayerPrefs.SetInt(prefsKey, currentIndex);
     }
 }
