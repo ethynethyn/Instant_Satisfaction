@@ -25,35 +25,34 @@ public class PlayerController2D : MonoBehaviour
     [Header("State")]
     public bool inputEnabled = false;
 
-
     [Header("INPUT (Rebindable)")]
-    public KeyCode moveLeft  = KeyCode.A;
+    public KeyCode moveLeft = KeyCode.A;
     public KeyCode moveRight = KeyCode.D;
-    public KeyCode jumpKey   = KeyCode.W;
-    public KeyCode dashKey   = KeyCode.S;
-    public KeyCode shootKey  = KeyCode.Q;
+    public KeyCode jumpKey = KeyCode.W;
+    public KeyCode dashKey = KeyCode.S;
+    public KeyCode shootKey = KeyCode.Q;
 
     [Header("Movement")]
-    public float moveSpeed   = 8f;
-    public float airControl  = 0.7f;
+    public float moveSpeed = 8f;
+    public float airControl = 0.7f;
 
     [Header("Dash")]
-    public float dashSpeed    = 18f;
+    public float dashSpeed = 18f;
     public float dashDuration = 0.25f;
     public float dashCooldown = 0.6f;
 
     public Transform wallCheck;
-    public float     wallCheckDistance = 0.3f;
+    public float wallCheckDistance = 0.3f;
     public LayerMask groundLayer;
 
-    private bool  isDashing;
+    private bool isDashing;
     private float dashTimer;
     private float dashDirection;
     private float dashCooldownTimer;
 
     [Header("Jump Settings")]
-    public float jumpForce   = 14f;
-    public int   maxJumps    = 2;
+    public float jumpForce = 14f;
+    public int maxJumps = 2;
 
     private int jumpCount;
 
@@ -69,9 +68,9 @@ public class PlayerController2D : MonoBehaviour
     public Rigidbody2D rb;
 
     [Header("References")]
-    public SpriteRenderer     spriteRenderer;
-    public PlayerDebugText    debugText;
-    public Animator           animator;
+    public SpriteRenderer spriteRenderer;
+    public PlayerDebugText debugText;
+    public Animator animator;
     public PlayerMovementAudio movementAudio;
 
     [Header("Weapon")]
@@ -87,10 +86,8 @@ public class PlayerController2D : MonoBehaviour
     public bool facingRight = true;
 
     private float moveInput;
-    private bool  isGrounded;
+    private bool isGrounded;
 
-    // Cached bot jump-held state so FixedUpdate can read it
-    // (Update and FixedUpdate don't necessarily share the same frame)
     private bool botJumpHeldThisPhysicsStep;
 
     private PlayerCombat combat;
@@ -113,6 +110,12 @@ public class PlayerController2D : MonoBehaviour
             weaponHolderDefaultLocalPos = weaponHolder.localPosition;
     }
 
+    // Called by UI button to toggle bot input on/off
+    public void ToggleBotInput()
+    {
+        useBotInput = !useBotInput;
+    }
+
     void Update()
     {
         if (!inputEnabled)
@@ -130,7 +133,7 @@ public class PlayerController2D : MonoBehaviour
 
         ApplyMovement();
         HandleDash();
-        HandleJumpHold();      // ← fixed: now respects bot input
+        HandleJumpHold();
         ReduceStickiness();
 
         if (dashCooldownTimer > 0f)
@@ -142,37 +145,35 @@ public class PlayerController2D : MonoBehaviour
         moveInput = 0;
 
         bool jumpPressed = false;
-        bool jumpHeld    = false;
+        bool jumpHeld = false;
         bool dashPressed = false;
         bool shootPressed = false;
-        bool shootHeld    = false;
+        bool shootHeld = false;
 
         if (useBotInput)
         {
-            moveInput    = externalMoveInput;
-            jumpPressed  = externalJump;
-            jumpHeld     = externalJumpHeld;
-            dashPressed  = externalDash;
+            moveInput = externalMoveInput;
+            jumpPressed = externalJump;
+            jumpHeld = externalJumpHeld;
+            dashPressed = externalDash;
             shootPressed = externalShoot;
-            shootHeld    = externalShootHeld;
+            shootHeld = externalShootHeld;
 
-            // Cache for FixedUpdate (externalJumpHeld may change between Update ticks)
             botJumpHeldThisPhysicsStep = jumpHeld;
 
-            // Consume one-frame inputs
-            externalJump  = false;
-            externalDash  = false;
+            externalJump = false;
+            externalDash = false;
             externalShoot = false;
         }
         else
         {
-            if (Input.GetKey(moveLeft))  moveInput = -1;
-            if (Input.GetKey(moveRight)) moveInput =  1;
+            if (Input.GetKey(moveLeft)) moveInput = -1;
+            if (Input.GetKey(moveRight)) moveInput = 1;
 
-            jumpPressed  = Input.GetKeyDown(jumpKey);
-            jumpHeld     = Input.GetKey(jumpKey);
-            dashPressed  = Input.GetKeyDown(dashKey);
-            shootHeld    = Input.GetKey(shootKey);
+            jumpPressed = Input.GetKeyDown(jumpKey);
+            jumpHeld = Input.GetKey(jumpKey);
+            dashPressed = Input.GetKeyDown(dashKey);
+            shootHeld = Input.GetKey(shootKey);
             shootPressed = Input.GetKeyDown(shootKey);
         }
 
@@ -182,7 +183,6 @@ public class PlayerController2D : MonoBehaviour
         if (isGrounded)
             jumpCount = 0;
 
-        // ── JUMP ─────────────────────────────────────────────
         if (jumpPressed)
         {
             if (isGrounded || jumpCount < maxJumps)
@@ -201,8 +201,6 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
-        // ── SHORT HOP ────────────────────────────────────────
-        // Cuts upward velocity when the player releases jump early
         if (!jumpHeld && rb.linearVelocity.y > 0)
         {
             rb.linearVelocity = new Vector2(
@@ -210,25 +208,23 @@ public class PlayerController2D : MonoBehaviour
                 rb.linearVelocity.y * shortHopMultiplier);
         }
 
-        // ── DASH ─────────────────────────────────────────────
         if (dashPressed && !isDashing && dashCooldownTimer <= 0f)
         {
             StartDash();
             dashCooldownTimer = dashCooldown;
         }
 
-        // ── SHOOT ────────────────────────────────────────────
         if (combat != null)
         {
-            if (shootHeld)    combat.TryShoot(true);
+            if (shootHeld) combat.TryShoot(true);
             if (shootPressed) combat.TryShoot(false);
         }
     }
 
     void StartDash()
     {
-        isDashing     = true;
-        dashTimer     = dashDuration;
+        isDashing = true;
+        dashTimer = dashDuration;
         dashDirection = facingRight ? 1f : -1f;
     }
 
@@ -257,7 +253,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (isDashing) return;
 
-        float control     = isGrounded ? 1f : airControl;
+        float control = isGrounded ? 1f : airControl;
         float targetSpeed = moveInput * moveSpeed * control;
 
         rb.linearVelocity = new Vector2(
@@ -265,11 +261,6 @@ public class PlayerController2D : MonoBehaviour
             rb.linearVelocity.y);
     }
 
-    // ─────────────────────────────────────────────────────────
-    // BUG FIX: previously used Input.GetKey(jumpKey) regardless
-    // of useBotInput, so bots never received the jump-hold boost.
-    // Now reads externalJumpHeld (cached each Update) for bots.
-    // ─────────────────────────────────────────────────────────
     void HandleJumpHold()
     {
         bool holdingJump = useBotInput
@@ -293,10 +284,10 @@ public class PlayerController2D : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(
             transform.position, Vector2.right, 0.4f, groundLayer);
 
-        if (leftHit.collider  != null && moveInput < 0)
+        if (leftHit.collider != null && moveInput < 0)
             rb.AddForce(Vector2.right * 2f, ForceMode2D.Force);
         if (rightHit.collider != null && moveInput > 0)
-            rb.AddForce(Vector2.left  * 2f, ForceMode2D.Force);
+            rb.AddForce(Vector2.left * 2f, ForceMode2D.Force);
     }
 
     void HandleState()
@@ -323,7 +314,6 @@ public class PlayerController2D : MonoBehaviour
         moveInput = 0f;
         botJumpHeldThisPhysicsStep = false;
 
-        // Consume any leftover bot inputs
         externalMoveInput = 0f;
         externalJump = false;
         externalJumpHeld = false;
@@ -336,6 +326,7 @@ public class PlayerController2D : MonoBehaviour
         if (debugText != null)
             debugText.SetState(currentState);
     }
+
     void Flip()
     {
         if (moveInput > 0)
