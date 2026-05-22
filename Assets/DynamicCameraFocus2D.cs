@@ -37,10 +37,8 @@ public class DynamicCameraFocus2D : MonoBehaviour
     private Vector3 moveVelocity;
     private float zoomVelocity;
 
-    // SHAKE
     private float currentShakeStrength;
     private Vector3 shakeOffset;
-
 
     void Awake()
     {
@@ -59,160 +57,100 @@ public class DynamicCameraFocus2D : MonoBehaviour
         if (!followTargets)
             return;
 
-        List<Transform> activeTargets =
-            GetActiveTargets();
+        List<Transform> activeTargets = GetActiveTargets();
 
         if (activeTargets.Count == 0)
             return;
 
-        Bounds bounds =
-            GetBounds(activeTargets);
+        Bounds bounds = GetBounds(activeTargets);
 
         ZoomCamera(bounds);
-
         MoveCamera(bounds);
-
         UpdateShake();
     }
 
     List<Transform> GetActiveTargets()
     {
-        List<Transform> active =
-            new List<Transform>();
+        List<Transform> active = new List<Transform>();
 
         foreach (GameObject obj in targets)
         {
-            if (obj != null &&
-                obj.activeInHierarchy)
-            {
+            if (obj != null && obj.activeInHierarchy)
                 active.Add(obj.transform);
-            }
         }
 
         return active;
     }
 
-    Bounds GetBounds(
-        List<Transform> activeTargets
-    )
+    Bounds GetBounds(List<Transform> activeTargets)
     {
-        Bounds bounds =
-            new Bounds(
-                activeTargets[0].position,
-                Vector3.zero
-            );
+        Bounds bounds = new Bounds(activeTargets[0].position, Vector3.zero);
 
         foreach (Transform target in activeTargets)
-        {
-            bounds.Encapsulate(
-                target.position
-            );
-        }
+            bounds.Encapsulate(target.position);
 
         return bounds;
     }
 
     void MoveCamera(Bounds bounds)
     {
-        Vector3 targetPosition =
-            new Vector3(
-                bounds.center.x,
-                bounds.center.y,
-                transform.position.z
-            );
+        Vector3 targetPosition = new Vector3(
+            bounds.center.x,
+            bounds.center.y,
+            transform.position.z
+        );
 
-        // Clamp inside map bounds
         if (useBounds)
         {
-            float camHeight =
-                cam.orthographicSize;
+            float camHeight = cam.orthographicSize;
+            float camWidth = camHeight * cam.aspect;
 
-            float camWidth =
-                camHeight * cam.aspect;
-
-            targetPosition.x =
-                Mathf.Clamp(
-                    targetPosition.x,
-                    minBounds.x + camWidth,
-                    maxBounds.x - camWidth
-                );
-
-            targetPosition.y =
-                Mathf.Clamp(
-                    targetPosition.y,
-                    minBounds.y + camHeight,
-                    maxBounds.y - camHeight
-                );
-        }
-
-        Vector3 smoothedPosition =
-            Vector3.SmoothDamp(
-                transform.position,
-                targetPosition,
-                ref moveVelocity,
-                moveSmoothTime
+            targetPosition.x = Mathf.Clamp(
+                targetPosition.x,
+                minBounds.x + camWidth,
+                maxBounds.x - camWidth
             );
 
-        // APPLY SHAKE
-        transform.position =
-            smoothedPosition + shakeOffset;
+            targetPosition.y = Mathf.Clamp(
+                targetPosition.y,
+                minBounds.y + camHeight,
+                maxBounds.y - camHeight
+            );
+        }
+
+        Vector3 smoothedPosition = Vector3.SmoothDamp(
+            transform.position,
+            targetPosition,
+            ref moveVelocity,
+            moveSmoothTime
+        );
+
+        transform.position = smoothedPosition + shakeOffset;
     }
 
     void ZoomCamera(Bounds bounds)
     {
-        float verticalSize =
-            bounds.size.y * 0.5f;
+        float verticalSize = bounds.size.y * 0.5f;
+        float horizontalSize = (bounds.size.x * 0.5f) / cam.aspect;
 
-        float horizontalSize =
-            (bounds.size.x * 0.5f)
-            / cam.aspect;
-
-        float targetZoom =
-            Mathf.Max(
-                verticalSize,
-                horizontalSize
-            );
-
+        float targetZoom = Mathf.Max(verticalSize, horizontalSize);
         targetZoom += zoomPadding;
+        targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
 
-        targetZoom =
-            Mathf.Clamp(
-                targetZoom,
-                minZoom,
-                maxZoom
-            );
-
-        // Prevent showing outside map
         if (useBounds)
         {
-            float mapWidth =
-                (maxBounds.x - minBounds.x)
-                * 0.5f / cam.aspect;
-
-            float mapHeight =
-                (maxBounds.y - minBounds.y)
-                * 0.5f;
-
-            float maxAllowedZoom =
-                Mathf.Min(
-                    mapWidth,
-                    mapHeight
-                );
-
-            targetZoom =
-                Mathf.Min(
-                    targetZoom,
-                    maxAllowedZoom
-                );
+            float mapWidth = (maxBounds.x - minBounds.x) * 0.5f / cam.aspect;
+            float mapHeight = (maxBounds.y - minBounds.y) * 0.5f;
+            float maxAllowedZoom = Mathf.Min(mapWidth, mapHeight);
+            targetZoom = Mathf.Min(targetZoom, maxAllowedZoom);
         }
 
-        cam.orthographicSize =
-            Mathf.SmoothDamp(
-                cam.orthographicSize,
-                targetZoom,
-                ref zoomVelocity,
-                zoomSmoothTime
-            );
+        cam.orthographicSize = Mathf.SmoothDamp(
+            cam.orthographicSize,
+            targetZoom,
+            ref zoomVelocity,
+            zoomSmoothTime
+        );
     }
 
     void UpdateShake()
@@ -224,19 +162,15 @@ public class DynamicCameraFocus2D : MonoBehaviour
             return;
         }
 
-        shakeOffset =
-            (Vector3)Random.insideUnitCircle
-            * currentShakeStrength;
+        shakeOffset = (Vector3)Random.insideUnitCircle * currentShakeStrength;
 
-        currentShakeStrength =
-            Mathf.Lerp(
-                currentShakeStrength,
-                0f,
-                shakeDamping * Time.deltaTime
-            );
+        currentShakeStrength = Mathf.Lerp(
+            currentShakeStrength,
+            0f,
+            shakeDamping * Time.deltaTime
+        );
     }
 
-    // CALL THIS FROM WEAPONS
     public void AddShake(float amount)
     {
         currentShakeStrength += amount;
@@ -247,42 +181,42 @@ public class DynamicCameraFocus2D : MonoBehaviour
         followTargets = enabled;
     }
 
+    // Called by GameManager before/after winner cam lerp
+    // so the camera can move outside the play area bounds
+    public void SetBoundsEnabled(bool enabled)
+    {
+        useBounds = enabled;
+    }
+
     public void AddTarget(GameObject target)
     {
         if (!targets.Contains(target))
-        {
             targets.Add(target);
-        }
     }
 
     public void RemoveTarget(GameObject target)
     {
         if (targets.Contains(target))
-        {
             targets.Remove(target);
-        }
     }
 
     void OnDrawGizmosSelected()
     {
-        if (!useBounds)
-            return;
+        if (!useBounds) return;
 
         Gizmos.color = Color.green;
 
-        Vector3 center =
-            new Vector3(
-                (minBounds.x + maxBounds.x) * 0.5f,
-                (minBounds.y + maxBounds.y) * 0.5f,
-                0f
-            );
+        Vector3 center = new Vector3(
+            (minBounds.x + maxBounds.x) * 0.5f,
+            (minBounds.y + maxBounds.y) * 0.5f,
+            0f
+        );
 
-        Vector3 size =
-            new Vector3(
-                maxBounds.x - minBounds.x,
-                maxBounds.y - minBounds.y,
-                0f
-            );
+        Vector3 size = new Vector3(
+            maxBounds.x - minBounds.x,
+            maxBounds.y - minBounds.y,
+            0f
+        );
 
         Gizmos.DrawWireCube(center, size);
     }

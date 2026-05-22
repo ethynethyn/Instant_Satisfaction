@@ -31,8 +31,8 @@ public class Projectile : MonoBehaviour
     private Vector2 direction;
     private float speed;
     private float knockback;
+    private int damage;
     private int ownerInstanceID;
-
     private Vector3 startPos;
 
     [Header("Projectile")]
@@ -76,14 +76,14 @@ public class Projectile : MonoBehaviour
         float projectileSpeed,
         float kb,
         GameObject ownerObject,
-        int ricochetCount = 0
+        int ricochetCount = 0,
+        int projectileDamage = 50
     )
     {
         direction = dir.normalized;
-
         speed = projectileSpeed;
-
         knockback = kb;
+        damage = projectileDamage;
 
         remainingRicochets = ricochetCount;
 
@@ -104,56 +104,33 @@ public class Projectile : MonoBehaviour
 
         if (Vector3.Distance(startPos, transform.position) >= maxDistance)
         {
-            Debug.Log(
-                "Projectile destroyed: max distance reached"
-            );
-
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Projectile hit: " + other.name);
-
-        // IGNORE OWNER
         int hitRootID =
             other.transform.root.gameObject.GetInstanceID();
 
         if (hitRootID == ownerInstanceID)
-        {
-            Debug.Log("Hit own collider, ignoring");
             return;
-        }
 
-        // PLAY IMPACT SOUND
         PlayImpactSound(other);
-
-        // SPAWN IMPACT PARTICLES
         SpawnImpactParticles(other);
 
-        // PLAYER HIT
         PlayerHealth health =
             other.GetComponentInParent<PlayerHealth>();
 
         if (health != null)
         {
-            Debug.Log(
-                "PlayerHealth found on: "
-                + health.gameObject.name
-            );
-
             Vector2 kb = direction * knockback;
-
-            health.TakeHit(kb);
-
+            health.TakeHit(kb, damage);
             Destroy(gameObject);
             return;
         }
 
-        // CHECK RICOCHET TAGS
         bool ricochetSurface = false;
-
         foreach (string tag in ricochetTags)
         {
             if (other.CompareTag(tag))
@@ -163,87 +140,49 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        // RICOCHET
-        if (ricochetSurface &&
-            remainingRicochets > 0)
+        if (ricochetSurface && remainingRicochets > 0)
         {
             remainingRicochets--;
 
-            Vector2 normal =
-                GetCollisionNormal(other);
+            Vector2 normal = GetCollisionNormal(other);
 
-            // PERFECT REFLECTION
             Vector2 reflectedDirection =
-                Vector2.Reflect(
-                    direction,
-                    normal
-                ).normalized;
+                Vector2.Reflect(direction, normal).normalized;
 
-            // RANDOMIZED ANGLE
             float randomAngle =
-                Random.Range(
-                    -ricochetSpread,
-                    ricochetSpread
-                );
+                Random.Range(-ricochetSpread, ricochetSpread);
 
             reflectedDirection =
-                Quaternion.Euler(
-                    0,
-                    0,
-                    randomAngle
-                ) * reflectedDirection;
+                Quaternion.Euler(0, 0, randomAngle) * reflectedDirection;
 
-            direction =
-                reflectedDirection.normalized;
+            direction = reflectedDirection.normalized;
 
-            // PUSH PROJECTILE OUT
-            // prevents instant re-collision
-            transform.position +=
-                (Vector3)(direction * 0.05f);
+            transform.position += (Vector3)(direction * 0.05f);
 
             UpdateRotation();
-
-            Debug.Log(
-                "Ricochet! Remaining: "
-                + remainingRicochets
-            );
-
             return;
         }
-
-        Debug.Log(
-            "No PlayerHealth found — destroying projectile"
-        );
 
         Destroy(gameObject);
     }
 
     Vector2 GetCollisionNormal(Collider2D other)
     {
-        Vector2 closestPoint =
-            other.ClosestPoint(transform.position);
-
+        Vector2 closestPoint = other.ClosestPoint(transform.position);
         Vector2 normal =
-            ((Vector2)transform.position - closestPoint)
-            .normalized;
-
+            ((Vector2)transform.position - closestPoint).normalized;
         return normal;
     }
 
     void UpdateRotation()
     {
         float angle =
-            Mathf.Atan2(direction.y, direction.x)
-            * Mathf.Rad2Deg;
+            Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        transform.rotation =
-            Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
 
         if (spriteRenderer != null)
-        {
-            spriteRenderer.flipY =
-                direction.x < 0;
-        }
+            spriteRenderer.flipY = direction.x < 0;
     }
 
     private void SpawnImpactParticles(Collider2D other)
@@ -257,8 +196,7 @@ public class Projectile : MonoBehaviour
                 other.CompareTag(collision.tagName);
 
             bool layerMatch =
-                ((1 << other.gameObject.layer) &
-                collision.layers) != 0;
+                ((1 << other.gameObject.layer) & collision.layers) != 0;
 
             if (tagMatch || layerMatch)
             {
@@ -267,65 +205,34 @@ public class Projectile : MonoBehaviour
                 {
                     particlePrefab =
                         collision.particlePrefabs[
-                            Random.Range(
-                                0,
-                                collision.particlePrefabs.Length
-                            )
+                            Random.Range(0, collision.particlePrefabs.Length)
                         ];
-
                     break;
                 }
             }
         }
 
         if (particlePrefab == null)
-        {
             particlePrefab = defaultImpactParticle;
-        }
 
-        if (particlePrefab == null)
-            return;
+        if (particlePrefab == null) return;
 
-        Vector2 hitPoint =
-            other.ClosestPoint(transform.position);
+        Vector2 hitPoint = other.ClosestPoint(transform.position);
+        Vector2 normal = GetCollisionNormal(other);
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, normal);
 
-        Vector2 normal =
-            GetCollisionNormal(other);
+        GameObject particles = Instantiate(particlePrefab, hitPoint, rotation);
 
-        Quaternion rotation =
-            Quaternion.LookRotation(
-                Vector3.forward,
-                normal
-            );
-
-        GameObject particles =
-            Instantiate(
-                particlePrefab,
-                hitPoint,
-                rotation
-            );
-
-        ParticleSystem ps =
-            particles.GetComponent<ParticleSystem>();
-
+        ParticleSystem ps = particles.GetComponent<ParticleSystem>();
         if (ps != null)
-        {
-            Destroy(
-                particles,
-                ps.main.duration +
-                ps.main.startLifetime.constantMax
-            );
-        }
+            Destroy(particles, ps.main.duration + ps.main.startLifetime.constantMax);
         else
-        {
             Destroy(particles, 5f);
-        }
     }
 
     private void PlayImpactSound(Collider2D other)
     {
         AudioClip clipToPlay = null;
-
         float finalVolume = masterImpactVolume;
 
         foreach (CollisionSound collision in collisionSounds)
@@ -335,69 +242,40 @@ public class Projectile : MonoBehaviour
                 other.CompareTag(collision.tagName);
 
             bool layerMatch =
-                ((1 << other.gameObject.layer) &
-                collision.layers) != 0;
+                ((1 << other.gameObject.layer) & collision.layers) != 0;
 
             if (tagMatch || layerMatch)
             {
-                if (collision.sounds != null &&
-                    collision.sounds.Length > 0)
+                if (collision.sounds != null && collision.sounds.Length > 0)
                 {
                     clipToPlay =
                         collision.sounds[
-                            Random.Range(
-                                0,
-                                collision.sounds.Length
-                            )
+                            Random.Range(0, collision.sounds.Length)
                         ];
-
-                    finalVolume =
-                        collision.volume *
-                        masterImpactVolume;
-
+                    finalVolume = collision.volume * masterImpactVolume;
                     break;
                 }
             }
         }
 
         if (clipToPlay == null)
-        {
             clipToPlay = defaultImpactSound;
-        }
 
-        if (clipToPlay == null)
-            return;
+        if (clipToPlay == null) return;
 
-        GameObject tempAudio =
-            new GameObject("ImpactSound");
+        GameObject tempAudio = new GameObject("ImpactSound");
+        tempAudio.transform.position = transform.position;
 
-        tempAudio.transform.position =
-            transform.position;
-
-        AudioSource source =
-            tempAudio.AddComponent<AudioSource>();
-
+        AudioSource source = tempAudio.AddComponent<AudioSource>();
         source.clip = clipToPlay;
-
         source.volume = finalVolume;
-
         source.spatialBlend = 0f;
-
-        source.rolloffMode =
-            AudioRolloffMode.Linear;
-
+        source.rolloffMode = AudioRolloffMode.Linear;
         source.playOnAwake = false;
-
         source.loop = false;
-
-        source.pitch =
-            Random.Range(0.95f, 1.05f);
-
+        source.pitch = Random.Range(0.95f, 1.05f);
         source.Play();
 
-        Destroy(
-            tempAudio,
-            clipToPlay.length + 0.1f
-        );
+        Destroy(tempAudio, clipToPlay.length + 0.1f);
     }
 }

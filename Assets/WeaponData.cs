@@ -7,7 +7,6 @@ public class WeaponData : ScriptableObject
 
     [Header("Visuals")]
     public Sprite weaponSprite;
-
     public Vector3 localPosition;
     public Vector3 localRotation;
     public Vector3 localScale = Vector3.one;
@@ -19,6 +18,10 @@ public class WeaponData : ScriptableObject
     public float fireRate = 0.2f;
     public float projectileSpeed = 20f;
     public float knockbackForce = 10f;
+
+    [Header("Damage")]
+    public int damage = 50;
+
     [Header("Ricochet")]
     public int ricochetCount = 0;
 
@@ -52,7 +55,5 @@ public class WeaponData : ScriptableObject
 
     [Header("Pickup Audio")]
     public AudioClip pickupSound;
-
-    [Range(0f, 1f)]
-    public float pickupVolume = 1f;
+    [Range(0f, 1f)] public float pickupVolume = 1f;
 }

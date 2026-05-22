@@ -54,13 +54,9 @@ public class PlayerCombat : MonoBehaviour
         UpdateFireUI();
     }
 
-    // -----------------------------
-    // SHOOT INPUT
-    // -----------------------------
     public void TryShoot(bool held)
     {
-        if (currentWeapon == null)
-            return;
+        if (currentWeapon == null) return;
 
         bool shouldFire = currentWeapon.automatic ? held : !held;
 
@@ -70,25 +66,17 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        if (!canShoot || reloading || isFiring)
-            return;
-
+        if (!canShoot || reloading || isFiring) return;
         StartCoroutine(ShootRoutine());
     }
 
-    // -----------------------------
-    // SHOOT ROUTINE
-    // -----------------------------
     IEnumerator ShootRoutine()
     {
         isFiring = true;
         canShoot = false;
 
-        // 🔊 FIRE SOUND
         if (currentWeapon.fireSound != null && audioSource != null)
-        {
             audioSource.PlayOneShot(currentWeapon.fireSound, currentWeapon.fireVolume);
-        }
 
         TriggerMuzzleFlash();
 
@@ -99,11 +87,14 @@ public class PlayerCombat : MonoBehaviour
 
         for (int i = 0; i < currentWeapon.projectileCount; i++)
         {
-            float spread = Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
+            float spread =
+                Random.Range(-currentWeapon.spreadAngle, currentWeapon.spreadAngle);
 
-            Vector2 finalDirection = Quaternion.Euler(0, 0, spread) * baseDirection;
+            Vector2 finalDirection =
+                Quaternion.Euler(0, 0, spread) * baseDirection;
 
-            float angle = Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
+            float angle =
+                Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
 
             GameObject bullet = Instantiate(
                 currentWeapon.projectilePrefab,
@@ -116,12 +107,13 @@ public class PlayerCombat : MonoBehaviour
             if (projectile != null)
             {
                 projectile.Initialize(
-     finalDirection,
-     currentWeapon.projectileSpeed,
-     currentWeapon.knockbackForce,
-     gameObject,
-     currentWeapon.ricochetCount
- );
+                    finalDirection,
+                    currentWeapon.projectileSpeed,
+                    currentWeapon.knockbackForce,
+                    gameObject,
+                    currentWeapon.ricochetCount,
+                    currentWeapon.damage          // ← damage passed through
+                );
             }
 
             Collider2D bulletCol = bullet.GetComponent<Collider2D>();
@@ -131,42 +123,28 @@ public class PlayerCombat : MonoBehaviour
                 spawnedBulletColliders.Add(bulletCol);
 
                 foreach (Collider2D ownerCol in GetComponentsInChildren<Collider2D>())
-                {
                     Physics2D.IgnoreCollision(bulletCol, ownerCol);
-                }
             }
         }
 
-        // bullet vs bullet ignore
         for (int i = 0; i < spawnedBulletColliders.Count; i++)
-        {
             for (int j = i + 1; j < spawnedBulletColliders.Count; j++)
-            {
                 Physics2D.IgnoreCollision(spawnedBulletColliders[i], spawnedBulletColliders[j]);
-            }
-        }
 
-        // recoil
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
         if (rb != null)
         {
-            Vector2 recoilDirection = (controller.facingRight ? Vector2.left : Vector2.right);
+            Vector2 recoilDirection =
+                controller.facingRight ? Vector2.left : Vector2.right;
             rb.AddForce(recoilDirection * currentWeapon.recoilForce, ForceMode2D.Impulse);
         }
 
-        // camera shake
         DynamicCameraFocus2D cam = Camera.main.GetComponent<DynamicCameraFocus2D>();
-
         if (cam != null)
             cam.AddShake(currentWeapon.screenShake);
 
-        // ammo
         currentAmmo--;
 
-        // -----------------------------
-        // RELOAD (FIXED - ONLY ONCE)
-        // -----------------------------
         if (currentAmmo <= 0 && !reloading)
         {
             reloading = true;
@@ -175,9 +153,7 @@ public class PlayerCombat : MonoBehaviour
                 debugText.SetReloading(true);
 
             if (currentWeapon.reloadSound != null && audioSource != null)
-            {
                 audioSource.PlayOneShot(currentWeapon.reloadSound, currentWeapon.reloadVolume);
-            }
 
             yield return new WaitForSeconds(currentWeapon.reloadTime);
 
@@ -195,9 +171,6 @@ public class PlayerCombat : MonoBehaviour
         canShoot = true;
     }
 
-    // -----------------------------
-    // MUZZLE FLASH
-    // -----------------------------
     void TriggerMuzzleFlash()
     {
         if (muzzleFlashObject == null || firePoint == null || currentWeapon == null)
@@ -212,10 +185,8 @@ public class PlayerCombat : MonoBehaviour
         muzzleFlashObject.transform.localRotation = Quaternion.identity;
 
         float dir = controller.facingRight ? 1f : -1f;
-
         Vector3 localPos = Vector3.zero;
         localPos.x = currentWeapon.muzzleFlashOffsetX * dir;
-
         muzzleFlashObject.transform.localPosition = localPos;
     }
 
@@ -226,25 +197,19 @@ public class PlayerCombat : MonoBehaviour
         muzzleFlashObject.SetActive(false);
     }
 
-    // -----------------------------
-    // WEAPON SYSTEM
-    // -----------------------------
     public void ReplaceWeapon(WeaponData weapon)
     {
         currentWeapon = weapon;
         currentAmmo = weapon.magazineSize;
-
         reloading = false;
         isFiring = false;
         canShoot = true;
-
         UpdateWeaponVisual();
     }
 
     public void ResetForRound()
     {
         currentWeapon = startingWeapon;
-
         reloading = false;
         isFiring = false;
         canShoot = true;
@@ -252,10 +217,8 @@ public class PlayerCombat : MonoBehaviour
         if (currentWeapon != null)
             currentAmmo = currentWeapon.magazineSize;
 
-        // Stop any in-flight coroutines (shoot, reload, muzzle flash)
         StopAllCoroutines();
 
-        // Force muzzle flash off — coroutine may have been killed mid-run
         if (muzzleFlashObject != null)
             muzzleFlashObject.SetActive(false);
 
@@ -273,9 +236,6 @@ public class PlayerCombat : MonoBehaviour
             debugText.SetFiring(isFiring);
     }
 
-    // -----------------------------
-    // VISUALS
-    // -----------------------------
     void UpdateWeaponVisual()
     {
         if (currentWeaponVisual != null)
@@ -301,11 +261,8 @@ public class PlayerCombat : MonoBehaviour
         sr.sortingLayerName = "Player";
         sr.sortingOrder = 10;
 
-        // Apply current facing direction immediately so the weapon
-        // is correctly oriented on pickup without needing to move first
         sr.flipX = !controller.facingRight;
 
-        // Also sync firePoint and weaponHolder positions to current facing
         ApplyFacingToOffsets(controller.facingRight);
     }
 
@@ -316,8 +273,6 @@ public class PlayerCombat : MonoBehaviour
 
         if (pc.firePoint != null)
         {
-            // Read the default local pos via reflection isn't available,
-            // so we just correct the sign of x directly
             Vector3 p = pc.firePoint.localPosition;
             p.x = facingRight ? Mathf.Abs(p.x) : -Mathf.Abs(p.x);
             pc.firePoint.localPosition = p;
@@ -336,5 +291,4 @@ public class PlayerCombat : MonoBehaviour
         if (currentWeaponVisual != null)
             currentWeaponVisual.SetActive(active);
     }
-
 }
