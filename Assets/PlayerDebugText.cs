@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerDebugText : MonoBehaviour
 {
@@ -8,17 +7,12 @@ public class PlayerDebugText : MonoBehaviour
     public GameObject reloadIconObject;
     public GameObject winnerIconObject;
 
-    [Header("Winner Settings")]
-    public float winnerIconDelay = 0.5f;
-
     private PlayerController2D.PlayerState state;
     private bool firing;
     private bool reloading;
     private bool isWinner = false;
 
     private PlayerCombat combat;
-
-    private Coroutine winnerRoutine;
 
     void Start()
     {
@@ -37,26 +31,7 @@ public class PlayerDebugText : MonoBehaviour
 
     public void SetWinner(bool value)
     {
-        if (winnerRoutine != null)
-            StopCoroutine(winnerRoutine);
-
-        if (value)
-        {
-            winnerRoutine =
-                StartCoroutine(ShowWinnerDelayed());
-        }
-        else
-        {
-            isWinner = false;
-            UpdateIcons();
-        }
-    }
-
-    IEnumerator ShowWinnerDelayed()
-    {
-        yield return new WaitForSeconds(winnerIconDelay);
-
-        isWinner = true;
+        isWinner = value;
         UpdateIcons();
     }
 
@@ -65,10 +40,6 @@ public class PlayerDebugText : MonoBehaviour
         firing = false;
         reloading = false;
         isWinner = false;
-
-        if (winnerRoutine != null)
-            StopCoroutine(winnerRoutine);
-
         UpdateIcons();
     }
 

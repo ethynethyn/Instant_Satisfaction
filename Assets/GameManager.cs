@@ -50,18 +50,14 @@ public class GameManager : MonoBehaviour
     public Camera player4WinCamera;
 
     private List<PlayerDebugText> debugTexts = new List<PlayerDebugText>();
-
     private Vector3 originalCamPosition;
     private float originalCamSize;
-
     private bool roundOver = false;
     private bool gameActive = false;
+    private bool waitingForAllReady = false;
 
     private List<PlayerHealth> activePlayers = new List<PlayerHealth>();
     private List<Transform> activeSpawnPoints = new List<Transform>();
-
-    // Set when waiting for RoundEndUI ready-up to complete
-    private bool waitingForAllReady = false;
 
     void Awake()
     {
@@ -88,18 +84,14 @@ public class GameManager : MonoBehaviour
     }
 
     // ─────────────────────────────────────────────────────────
-    // READY UP CALLBACK — called by RoundEndUI when all ready
-    // ─────────────────────────────────────────────────────────
     public void OnAllPlayersReady()
     {
         if (!waitingForAllReady) return;
 
         waitingForAllReady = false;
 
-        if (roundEndUI != null)
-            roundEndUI.Hide();
+        if (roundEndUI != null) roundEndUI.Hide();
 
-        // Reset ready flags
         foreach (PlayerHealth p in activePlayers)
         {
             if (p == null) continue;
@@ -111,6 +103,7 @@ public class GameManager : MonoBehaviour
         StartRound();
     }
 
+    // ─────────────────────────────────────────────────────────
     void CacheDebugTexts()
     {
         debugTexts.Clear();
@@ -126,9 +119,8 @@ public class GameManager : MonoBehaviour
     void SetWinnerText(PlayerHealth winner)
     {
         foreach (PlayerDebugText dbg in debugTexts)
-        {
             if (dbg != null) dbg.SetWinner(false);
-        }
+
         PlayerDebugText winnerDbg =
             winner.GetComponentInChildren<PlayerDebugText>();
         if (winnerDbg != null) winnerDbg.SetWinner(true);
@@ -137,11 +129,10 @@ public class GameManager : MonoBehaviour
     void ClearWinnerText()
     {
         foreach (PlayerDebugText dbg in debugTexts)
-        {
             if (dbg != null) dbg.SetWinner(false);
-        }
     }
 
+    // ─────────────────────────────────────────────────────────
     public void ForceMenuState()
     {
         gameActive = false;
@@ -169,6 +160,7 @@ public class GameManager : MonoBehaviour
         if (mainMenu != null) mainMenu.ReturnToMainMenu();
     }
 
+    // ─────────────────────────────────────────────────────────
     public void SetPlayerCount(int playerCount)
     {
         activePlayers.Clear();
@@ -190,6 +182,7 @@ public class GameManager : MonoBehaviour
         activeSpawnPoints = spawnPoints;
     }
 
+    // ─────────────────────────────────────────────────────────
     public void BeginRounds()
     {
         if (activePlayers.Count == 0)
@@ -204,7 +197,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Reset wallets for fresh game
         foreach (PlayerHealth p in activePlayers)
         {
             if (p == null) continue;
@@ -222,22 +214,20 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PreGameAllocationRoutine());
     }
 
-    // Show round end UI before first round so players can allocate
     IEnumerator PreGameAllocationRoutine()
     {
-        // Spawn players so they're visible behind the UI
-        SpawnPlayers(false); // false = don't enable input
+        SpawnPlayers(false);
 
         if (roundEndUI != null)
             roundEndUI.ShowRoundEnd(activePlayers, false);
 
         waitingForAllReady = true;
 
-        // Wait until OnAllPlayersReady() clears the flag
         while (waitingForAllReady)
             yield return null;
     }
 
+    // ─────────────────────────────────────────────────────────
     public void ResetAllPlayers()
     {
         foreach (PlayerHealth p in players)
@@ -272,6 +262,7 @@ public class GameManager : MonoBehaviour
     List<Transform> GetShuffledSpawnPoints()
     {
         List<Transform> shuffled = new List<Transform>(activeSpawnPoints);
+
         for (int i = shuffled.Count - 1; i > 0; i--)
         {
             int rand = Random.Range(0, i + 1);
@@ -279,10 +270,10 @@ public class GameManager : MonoBehaviour
             shuffled[i] = shuffled[rand];
             shuffled[rand] = temp;
         }
+
         return shuffled;
     }
 
-    // Shared spawn logic used by both StartRound and PreGameAllocationRoutine
     void SpawnPlayers(bool enableInput)
     {
         List<PlayerHealth> survivingPlayers = new List<PlayerHealth>();
@@ -345,6 +336,15 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PreFightCountdownRoutine()
     {
+        // Enable camera following now that the round is live
+        DynamicCameraFocus2D dynamicCam =
+            mainCamera != null
+                ? mainCamera.GetComponent<DynamicCameraFocus2D>()
+                : null;
+
+        if (dynamicCam != null)
+            dynamicCam.SetFollow(true);
+
         SetPreFightObjects(true);
 
         ShowOnlyCountdownObject(countdown3Object);
@@ -392,21 +392,18 @@ public class GameManager : MonoBehaviour
     void SetPreFightObjects(bool state)
     {
         foreach (GameObject obj in preFightObjects)
-        {
             if (obj != null) obj.SetActive(state);
-        }
     }
 
+    // ─────────────────────────────────────────────────────────
     public void OnPlayerDied()
     {
         if (roundOver) return;
 
         int aliveThisRound = 0;
         foreach (PlayerHealth p in activePlayers)
-        {
             if (p != null && p.gameObject.activeSelf)
                 aliveThisRound++;
-        }
 
         if (aliveThisRound <= 1)
         {
@@ -414,10 +411,8 @@ public class GameManager : MonoBehaviour
 
             int playersStillInGame = 0;
             foreach (PlayerHealth p in activePlayers)
-            {
                 if (p != null && p.currentLives > 0)
                     playersStillInGame++;
-            }
 
             if (playersStillInGame <= 1)
             {
@@ -439,6 +434,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // ─────────────────────────────────────────────────────────
     void FreezeAllPlayers()
     {
         foreach (PlayerHealth p in activePlayers)
@@ -516,7 +512,8 @@ public class GameManager : MonoBehaviour
             );
 
             if (!reachedTarget &&
-                Vector3.Distance(mainCamera.transform.position, targetPos) < 0.01f)
+                Vector3.Distance(
+                    mainCamera.transform.position, targetPos) < 0.01f)
             {
                 mainCamera.transform.position = targetPos;
                 mainCamera.orthographicSize = targetSize;
@@ -554,16 +551,16 @@ public class GameManager : MonoBehaviour
         if (dynamicCam != null)
         {
             dynamicCam.SetBoundsEnabled(true);
-            dynamicCam.SetFollow(true);
+            dynamicCam.SetFollow(false);
         }
     }
 
+    // ─────────────────────────────────────────────────────────
     IEnumerator RoundEndSequence()
     {
         FreezeAllPlayers();
         CacheDebugTexts();
 
-        // Find winner (still active)
         PlayerHealth winner = null;
         foreach (PlayerHealth p in activePlayers)
         {
@@ -574,7 +571,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Winner keeps their remaining health as wallet value
         if (winner != null)
         {
             PlayerWallet winnerWallet = winner.GetComponent<PlayerWallet>();
@@ -582,7 +578,6 @@ public class GameManager : MonoBehaviour
                 winnerWallet.SetWalletFromSurvivedHealth(winner.currentHealth);
         }
 
-        // Losers reset wallet to 0
         foreach (PlayerHealth p in activePlayers)
         {
             if (p == null || p == winner) continue;
@@ -604,7 +599,9 @@ public class GameManager : MonoBehaviour
         }
 
         DynamicCameraFocus2D dynamicCam =
-            mainCamera.GetComponent<DynamicCameraFocus2D>();
+            mainCamera != null
+                ? mainCamera.GetComponent<DynamicCameraFocus2D>()
+                : null;
 
         if (dynamicCam != null)
         {
@@ -613,11 +610,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (targetCam != null)
-            yield return StartCoroutine(LerpMainCameraTo(targetCam, roundEndDelay));
+            yield return StartCoroutine(
+                LerpMainCameraTo(targetCam, roundEndDelay));
         else
             yield return new WaitForSeconds(roundEndDelay);
-
-        if (dynamicCam != null) dynamicCam.SetFollow(true);
 
         HideAllWinDisplays();
         ClearWinnerText();
@@ -625,7 +621,6 @@ public class GameManager : MonoBehaviour
 
         ResetCameraImmediate();
 
-        // Show allocation UI — wait for all players to ready up
         foreach (PlayerHealth p in activePlayers)
         {
             if (p == null) continue;
@@ -640,7 +635,6 @@ public class GameManager : MonoBehaviour
 
         while (waitingForAllReady)
             yield return null;
-        // OnAllPlayersReady() will call StartRound() from here
     }
 
     IEnumerator GameOverSequence(PlayerHealth eliminated)
@@ -672,7 +666,9 @@ public class GameManager : MonoBehaviour
         }
 
         DynamicCameraFocus2D dynamicCam =
-            mainCamera.GetComponent<DynamicCameraFocus2D>();
+            mainCamera != null
+                ? mainCamera.GetComponent<DynamicCameraFocus2D>()
+                : null;
 
         if (dynamicCam != null)
         {
@@ -681,11 +677,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (targetCam != null)
-            yield return StartCoroutine(LerpMainCameraTo(targetCam, roundEndDelay));
+            yield return StartCoroutine(
+                LerpMainCameraTo(targetCam, roundEndDelay));
         else
             yield return new WaitForSeconds(roundEndDelay);
-
-        if (dynamicCam != null) dynamicCam.SetFollow(true);
 
         ClearWeapons();
 
@@ -717,7 +712,8 @@ public class GameManager : MonoBehaviour
         foreach (PlayerHealth p in activePlayers)
         {
             if (p == null) continue;
-            PlayerWinDisplay winDisplay = p.GetComponent<PlayerWinDisplay>();
+            PlayerWinDisplay winDisplay =
+                p.GetComponent<PlayerWinDisplay>();
             if (winDisplay != null) winDisplay.HideWin();
         }
     }

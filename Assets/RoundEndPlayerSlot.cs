@@ -95,7 +95,7 @@ public class RoundEndPlayerSlot : MonoBehaviour
         {
             readyText.color = playerColour;
             readyText.text = wallet.CanReady()
-                ? "Press SHOOT to ready"
+                ? "SHOOT to ready up"
                 : "Min entry: $" + entryFee;
         }
     }
@@ -159,7 +159,7 @@ public class RoundEndPlayerSlot : MonoBehaviour
         float duration = bankDuration / globalIntensity;
 
         // IN = right tilt, OUT = left tilt
-        float direction = moneyIntoBank ? -1f : 1f;
+        float direction = moneyIntoBank ? 1f : -1f;
         float peak = bankTiltStrength * direction * globalIntensity;
 
         while (elapsed < duration)
