@@ -62,11 +62,13 @@ public class RoundEndPlayerSlot : MonoBehaviour
             playerLabel.color = playerColour;
         }
 
-        if (bankText != null)
-            bankText.color = new Color(1f, 0.85f, 0.1f);
+        //COLOURS
 
-        if (walletText != null)
-            walletText.color = new Color(0.2f, 0.85f, 0.3f);
+      //  if (bankText != null)
+        //    bankText.color = new Color(1f, 0.85f, 0.1f);
+
+     //   if (walletText != null)
+      //      walletText.color = new Color(0.2f, 0.85f, 0.3f);
 
         if (readyText != null)
             readyText.color = playerColour;
@@ -86,16 +88,16 @@ public class RoundEndPlayerSlot : MonoBehaviour
         if (wallet == null) return;
 
         if (bankText != null)
-            bankText.text = "Bank: $" + wallet.bankAmount;
+            bankText.text = "$" + wallet.bankAmount;
 
         if (walletText != null)
-            walletText.text = "Wallet: $" + wallet.walletAmount;
+            walletText.text = "$" + wallet.walletAmount;
 
         if (!isGameOver && readyText != null && !wallet.isReady)
         {
             readyText.color = playerColour;
             readyText.text = wallet.CanReady()
-                ? "SHOOT to ready up"
+                ? "SHOOT to ready"
                 : "Min entry: $" + entryFee;
         }
     }
