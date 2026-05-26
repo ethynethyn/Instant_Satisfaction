@@ -6,7 +6,7 @@ public class WeaponData : ScriptableObject
     public string weaponName;
 
     [Header("Visuals")]
-    public Sprite weaponSprite;
+    public Sprite  weaponSprite;
     public Vector3 localPosition;
     public Vector3 localRotation;
     public Vector3 localScale = Vector3.one;
@@ -14,10 +14,14 @@ public class WeaponData : ScriptableObject
     [Header("Projectile")]
     public GameObject projectilePrefab;
 
+    [Header("Special Effect")]
+    [Tooltip("Leave empty for a normal projectile")]
+    public ProjectileEffectData specialEffect;
+
     [Header("Combat")]
-    public float fireRate = 0.2f;
+    public float fireRate        = 0.2f;
     public float projectileSpeed = 20f;
-    public float knockbackForce = 10f;
+    public float knockbackForce  = 10f;
 
     [Header("Damage")]
     public int damage = 50;
@@ -35,8 +39,8 @@ public class WeaponData : ScriptableObject
     public int projectileCount = 1;
 
     [Header("Magazine")]
-    public int magazineSize = 6;
-    public float reloadTime = 1f;
+    public int   magazineSize = 6;
+    public float reloadTime   = 1f;
 
     [Header("Firing Mode")]
     public bool automatic = true;
@@ -50,7 +54,7 @@ public class WeaponData : ScriptableObject
     [Header("Audio")]
     public AudioClip fireSound;
     public AudioClip reloadSound;
-    [Range(0f, 1f)] public float fireVolume = 1f;
+    [Range(0f, 1f)] public float fireVolume   = 1f;
     [Range(0f, 1f)] public float reloadVolume = 1f;
 
     [Header("Pickup Audio")]

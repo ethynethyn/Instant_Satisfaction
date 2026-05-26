@@ -44,19 +44,27 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeHit(Vector2 knockbackForce, int damage = 0)
     {
+        int oldHealth  = currentHealth;
         currentHealth -= damage;
 
         if (rb != null && knockbackForce != Vector2.zero)
             rb.AddForce(knockbackForce, ForceMode2D.Impulse);
 
         if (wallet != null)
-            wallet.UpdateBalanceFromHealth(currentHealth);
+            wallet.UpdateBalanceFromHealth(currentHealth, oldHealth);
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             Die();
         }
+    }
+
+    // Called by wallet effects that bypass normal damage
+    public void ForceDie()
+    {
+        currentHealth = 0;
+        Die();
     }
 
     void Die()
@@ -68,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetForRound(Vector3 spawnPosition)
     {
-        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity  = Vector2.zero;
         transform.position = spawnPosition;
         gameObject.SetActive(true);
 

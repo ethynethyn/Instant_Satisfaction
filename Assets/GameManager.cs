@@ -460,9 +460,14 @@ public class GameManager : MonoBehaviour
 
     void ClearWeapons()
     {
-        WeaponPickup[] pickups =
+        WeaponPickup[] weaponPickups =
             FindObjectsByType<WeaponPickup>(FindObjectsSortMode.None);
-        foreach (WeaponPickup pickup in pickups)
+        foreach (WeaponPickup pickup in weaponPickups)
+            Destroy(pickup.gameObject);
+
+        ShiftPickup[] shiftPickups =
+            FindObjectsByType<ShiftPickup>(FindObjectsSortMode.None);
+        foreach (ShiftPickup pickup in shiftPickups)
             Destroy(pickup.gameObject);
     }
 

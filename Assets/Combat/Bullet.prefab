@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 144423890751835223}
   - component: {fileID: 172281772282240748}
   - component: {fileID: -6377207977903513180}
+  - component: {fileID: -7478748241431739736}
   m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6895167356829100281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2806551861cab7544b26c921caa6ac35, type: 3}
   m_Name: 
@@ -234,3 +235,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.12, y: 1.4408166}
   m_EdgeRadius: 0
+--- !u!114 &-7478748241431739736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895167356829100281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94086df2ee5c445e3bfe0f8038bd2265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: e56b735efa28648cca8eae32a7aba97c, type: 2}
+  owner: {fileID: 0}
+  maxDistance: 100

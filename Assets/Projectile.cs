@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class Projectile : MonoBehaviour
 {
     [System.Serializable]
+    
+    
     public class CollisionSound
     {
         [Header("Detection")]
@@ -26,6 +28,14 @@ public class Projectile : MonoBehaviour
 
         [Header("Particles")]
         public GameObject[] particlePrefabs;
+    }
+    
+    public enum ProjectileEffectType
+    {
+        FreezeAccount,
+        Tax,
+        Scam,
+        SwapWallet
     }
 
     private Vector2 direction;

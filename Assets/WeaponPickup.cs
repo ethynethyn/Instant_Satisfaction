@@ -4,16 +4,15 @@ public class WeaponPickup : MonoBehaviour
 {
     public WeaponData[] possibleWeapons;
 
+    // Set by WeaponSpawner when this pickup is instantiated
+    [HideInInspector] public Transform spawnPoint;
+
     private WeaponData selectedWeapon;
 
     void Start()
     {
-        // Destroy self if another pickup already exists at this spawn point
         Collider2D[] overlaps =
-            Physics2D.OverlapCircleAll(
-                transform.position,
-                0.1f
-            );
+            Physics2D.OverlapCircleAll(transform.position, 0.1f);
 
         foreach (Collider2D col in overlaps)
         {
@@ -25,126 +24,81 @@ public class WeaponPickup : MonoBehaviour
             }
         }
 
-        // Initial random weapon for visual/debug
         if (possibleWeapons.Length > 0)
         {
             selectedWeapon =
                 possibleWeapons[
-                    Random.Range(
-                        0,
-                        possibleWeapons.Length
-                    )
-                ];
+                    Random.Range(0, possibleWeapons.Length)];
 
-            Debug.Log(
-                "Spawned weapon: "
-                + selectedWeapon.weaponName
-            );
+            Debug.Log("Spawned weapon: " + selectedWeapon.weaponName);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (GameManager.Instance != null && GameManager.Instance.IsRoundOver) return;
-        Debug.Log(
-            "Trigger hit: "
-            + other.name
-        );
+        if (GameManager.Instance != null &&
+            GameManager.Instance.IsRoundOver) return;
 
         PlayerCombat combat =
             other.GetComponentInParent<PlayerCombat>();
 
         if (combat == null)
         {
-            Debug.LogError(
-                "PlayerCombat NOT FOUND on player or parent"
-            );
-
-            return;
+            combat = other.transform.root
+                .GetComponentInChildren<PlayerCombat>();
         }
 
-        // No weapons available
-        if (possibleWeapons.Length == 0)
-            return;
+        if (combat == null) return;
+        if (possibleWeapons.Length == 0) return;
 
-        WeaponData currentWeapon =
-            combat.currentWeapon;
+        WeaponData currentWeapon = combat.currentWeapon;
 
-        // If only one weapon exists, use it
         if (possibleWeapons.Length == 1)
         {
             selectedWeapon = possibleWeapons[0];
         }
         else
         {
-            // Keep rerolling until different
             do
             {
                 selectedWeapon =
                     possibleWeapons[
-                        Random.Range(
-                            0,
-                            possibleWeapons.Length
-                        )
-                    ];
+                        Random.Range(0, possibleWeapons.Length)];
             }
             while (selectedWeapon == currentWeapon);
         }
 
-        Debug.Log(
-            "Equipping weapon: "
-            + selectedWeapon.weaponName
-        );
+        Debug.Log("Equipping weapon: " + selectedWeapon.weaponName);
 
-        // PLAY PICKUP SOUND
         PlayPickupSound();
 
-        // EQUIP WEAPON
         combat.ReplaceWeapon(selectedWeapon);
+
+        // Notify spawner this point is now free
+        if (WeaponSpawner.Instance != null)
+            WeaponSpawner.Instance.OnPickupCollected(spawnPoint);
 
         Destroy(gameObject);
     }
 
     void PlayPickupSound()
     {
-        if (selectedWeapon == null)
-            return;
+        if (selectedWeapon == null) return;
+        if (selectedWeapon.pickupSound == null) return;
 
-        if (selectedWeapon.pickupSound == null)
-            return;
+        GameObject tempAudio = new GameObject("WeaponPickupAudio");
+        tempAudio.transform.position = transform.position;
 
-        GameObject tempAudio =
-            new GameObject("WeaponPickupAudio");
-
-        tempAudio.transform.position =
-            transform.position;
-
-        AudioSource source =
-            tempAudio.AddComponent<AudioSource>();
-
-        source.clip =
-            selectedWeapon.pickupSound;
-
-        source.volume =
-            selectedWeapon.pickupVolume;
-
+        AudioSource source = tempAudio.AddComponent<AudioSource>();
+        source.clip         = selectedWeapon.pickupSound;
+        source.volume       = selectedWeapon.pickupVolume;
         source.spatialBlend = 0f;
-
-        source.rolloffMode =
-            AudioRolloffMode.Linear;
-
-        source.playOnAwake = false;
-
-        source.loop = false;
-
-        source.pitch =
-            Random.Range(0.98f, 1.02f);
-
+        source.rolloffMode  = AudioRolloffMode.Linear;
+        source.playOnAwake  = false;
+        source.loop         = false;
+        source.pitch        = Random.Range(0.98f, 1.02f);
         source.Play();
 
-        Destroy(
-            tempAudio,
-            selectedWeapon.pickupSound.length + 0.1f
-        );
+        Destroy(tempAudio, selectedWeapon.pickupSound.length + 0.1f);
     }
 }

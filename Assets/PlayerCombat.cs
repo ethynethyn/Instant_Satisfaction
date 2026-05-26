@@ -102,8 +102,9 @@ public class PlayerCombat : MonoBehaviour
                 Quaternion.Euler(0, 0, angle)
             );
 
-            Projectile projectile = bullet.GetComponent<Projectile>();
+            // Inside ShootRoutine, replace the projectile init block with:
 
+            Projectile projectile = bullet.GetComponent<Projectile>();
             if (projectile != null)
             {
                 projectile.Initialize(
@@ -112,7 +113,22 @@ public class PlayerCombat : MonoBehaviour
                     currentWeapon.knockbackForce,
                     gameObject,
                     currentWeapon.ricochetCount,
-                    currentWeapon.damage          // ← damage passed through
+                    currentWeapon.damage
+                );
+            }
+
+// If the weapon has a special effect, init that too
+            SpecialProjectile specialProjectile =
+                bullet.GetComponent<SpecialProjectile>();
+            if (specialProjectile != null)
+            {
+                specialProjectile.effectData = currentWeapon.specialEffect;
+                specialProjectile.Initialize(
+                    finalDirection,
+                    currentWeapon.projectileSpeed,
+                    currentWeapon.knockbackForce,
+                    gameObject,
+                    currentWeapon.damage
                 );
             }
 

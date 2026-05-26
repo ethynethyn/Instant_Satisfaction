@@ -365,7 +365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df2b8921ff6fce4ca730f883dc98176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrefab: {fileID: 3099056191963679596, guid: 0c24027b3cac3b9438a98f31f73e2ade, type: 3}
+  weaponPickupPrefabs:
+  - {fileID: 3099056191963679596, guid: 0c24027b3cac3b9438a98f31f73e2ade, type: 3}
+  shiftPickupPrefabs:
+  - {fileID: 3099056191963679596, guid: 3d6f989b7ae72428ab0965486871ab5b, type: 3}
   spawnInterval: 5
 --- !u!4 &8814453
 Transform:
@@ -43452,7 +43455,7 @@ MonoBehaviour:
   moveRight: 275
   jumpKey: 273
   dashKey: 274
-  shootKey: 305
+  shootKey: 47
   moveSpeed: 6
   airControl: 1
   dashSpeed: 20
