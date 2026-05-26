@@ -18,9 +18,11 @@ MonoBehaviour:
   localRotation: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
   projectilePrefab: {fileID: 6895167356829100281, guid: bf79b4ae32b2973478320d708538ab6a, type: 3}
+  specialEffect: {fileID: 11400000, guid: e56b735efa28648cca8eae32a7aba97c, type: 2}
   fireRate: 0.1
   projectileSpeed: 20
   knockbackForce: 10
+  damage: 5
   ricochetCount: 0
   recoilForce: 5
   spreadAngle: 0

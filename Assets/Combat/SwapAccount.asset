@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6574f8a91207b4df8ac3f8b9ffd64113, type: 3}
   m_Name: SwapAccount
   m_EditorClassIdentifier: 
-  effectType: 0
-  freezeDuration: 3
-  taxPercentage: 0.3
-  scamHarvestRate: 1
-  projectileColour: {r: 1, g: 1, b: 1, a: 1}
+  effectType: 3
+  freezeDuration: 0
+  taxPercentage: 0
+  scamHarvestRate: 0
+  projectileColour: {r: 1, g: 0.99106956, b: 0, a: 1}
   hitParticlePrefab: {fileID: 0}

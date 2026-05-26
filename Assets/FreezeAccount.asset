@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FreezeAccount
   m_EditorClassIdentifier: 
   effectType: 0
-  freezeDuration: 3
-  taxPercentage: 0.3
-  scamHarvestRate: 1
-  projectileColour: {r: 1, g: 1, b: 1, a: 1}
+  freezeDuration: 10
+  taxPercentage: 0
+  scamHarvestRate: 0
+  projectileColour: {r: 1, g: 0, b: 0, a: 1}
   hitParticlePrefab: {fileID: 0}

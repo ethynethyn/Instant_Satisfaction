@@ -369,7 +369,9 @@ MonoBehaviour:
   - {fileID: 3099056191963679596, guid: 0c24027b3cac3b9438a98f31f73e2ade, type: 3}
   shiftPickupPrefabs:
   - {fileID: 3099056191963679596, guid: 3d6f989b7ae72428ab0965486871ab5b, type: 3}
-  spawnInterval: 5
+  spawnIntervalMin: 3
+  spawnIntervalMax: 8
+  shiftSpawnChance: 0.5
 --- !u!4 &8814453
 Transform:
   m_ObjectHideFlags: 0
@@ -20862,6 +20864,12 @@ MonoBehaviour:
   walletAmount: 0
   isReady: 0
   activeBalanceText: {fileID: 0}
+  slotMachineDuration: 0.4
+  colourDefault: {r: 0.99034953, g: 1, b: 0, a: 1}
+  colourAdd: {r: 0.2, g: 0.85, b: 0.3, a: 1}
+  colourSubtract: {r: 0.95, g: 0.15, b: 0.15, a: 1}
+  colourFrozen: {r: 1, g: 1, b: 1, a: 1}
+  accountFrozen: 0
 --- !u!1 &707690368
 GameObject:
   m_ObjectHideFlags: 0
@@ -30972,6 +30980,12 @@ MonoBehaviour:
   walletAmount: 0
   isReady: 0
   activeBalanceText: {fileID: 971706009}
+  slotMachineDuration: 0.4
+  colourDefault: {r: 0.99034953, g: 1, b: 0, a: 1}
+  colourAdd: {r: 0.2, g: 0.85, b: 0.3, a: 1}
+  colourSubtract: {r: 0.95, g: 0.15, b: 0.15, a: 1}
+  colourFrozen: {r: 1, g: 1, b: 1, a: 1}
+  accountFrozen: 0
 --- !u!1 &990878898
 GameObject:
   m_ObjectHideFlags: 0
@@ -41297,6 +41311,12 @@ MonoBehaviour:
   walletAmount: 0
   isReady: 0
   activeBalanceText: {fileID: 0}
+  slotMachineDuration: 0.4
+  colourDefault: {r: 0.99034953, g: 1, b: 0, a: 1}
+  colourAdd: {r: 0.2, g: 0.85, b: 0.3, a: 1}
+  colourSubtract: {r: 0.95, g: 0.15, b: 0.15, a: 1}
+  colourFrozen: {r: 1, g: 1, b: 1, a: 1}
+  accountFrozen: 0
 --- !u!1 &1297448384
 GameObject:
   m_ObjectHideFlags: 0
@@ -43711,6 +43731,12 @@ MonoBehaviour:
   walletAmount: 0
   isReady: 0
   activeBalanceText: {fileID: 1106945180}
+  slotMachineDuration: 0.4
+  colourDefault: {r: 0.99034953, g: 1, b: 0, a: 1}
+  colourAdd: {r: 0.2, g: 0.85, b: 0.3, a: 1}
+  colourSubtract: {r: 0.95, g: 0.15, b: 0.15, a: 1}
+  colourFrozen: {r: 1, g: 1, b: 1, a: 1}
+  accountFrozen: 0
 --- !u!1 &1379908885
 GameObject:
   m_ObjectHideFlags: 0
